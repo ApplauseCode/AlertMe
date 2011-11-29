@@ -1,0 +1,458 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9D3999891465EC2C0017462A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE127CC5145F736A008A8EE1 /* CoreGraphics.framework */; };
+		9D5CFDD2146627EB0072C3EE /* AlertMeCustomNavBar2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D5CFDD1146627EB0072C3EE /* AlertMeCustomNavBar2@2x.png */; };
+		9D788BDA1471E92A00FFC214 /* AlertMeCustomNavBar4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D788BD91471E92A00FFC214 /* AlertMeCustomNavBar4@2x.png */; };
+		9D8BE50F148422CA00F03A66 /* PlaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8BE50E148422CA00F03A66 /* PlaceCell.m */; };
+		9D8BE512148422D400F03A66 /* PlaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8BE511148422D400F03A66 /* PlaceCell.xib */; };
+		9D8BE514148423EC00F03A66 /* starp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8BE513148423EC00F03A66 /* starp@2x.png */; };
+		9D8BE516148423F500F03A66 /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8BE515148423F500F03A66 /* star@2x.png */; };
+		9DC3B177148407B900213DE6 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC3B176148407B900213DE6 /* libz.dylib */; };
+		9DC3B179148407C800213DE6 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC3B178148407C800213DE6 /* MobileCoreServices.framework */; };
+		9DC3B17B148407D700213DE6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC3B17A148407D700213DE6 /* CFNetwork.framework */; };
+		9DC3B17D148407E200213DE6 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC3B17C148407E200213DE6 /* AddressBook.framework */; };
+		9DC3B17F148407EE00213DE6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC3B17E148407EE00213DE6 /* MapKit.framework */; };
+		9DC3B180148407FA00213DE6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D39998A1465EC380017462A /* QuartzCore.framework */; };
+		9DC3B1821484080800213DE6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC3B1811484080800213DE6 /* SystemConfiguration.framework */; };
+		9DC3B1831484084600213DE6 /* SimpleGeo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC3B1721484068500213DE6 /* SimpleGeo.framework */; };
+		9DC3B1871484088F00213DE6 /* SGController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC3B1861484088F00213DE6 /* SGController.m */; };
+		CE127CC2145F736A008A8EE1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE127CC1145F736A008A8EE1 /* UIKit.framework */; };
+		CE127CC4145F736A008A8EE1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE127CC3145F736A008A8EE1 /* Foundation.framework */; };
+		CE127CCC145F736A008A8EE1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE127CCA145F736A008A8EE1 /* InfoPlist.strings */; };
+		CE127CCE145F736A008A8EE1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE127CCD145F736A008A8EE1 /* main.m */; };
+		CE127CD2145F736A008A8EE1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE127CD1145F736A008A8EE1 /* AppDelegate.m */; };
+		CE127CD9145F73AD008A8EE1 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE127CD8145F73AD008A8EE1 /* Icon@2x.png */; };
+		CE127CDB145F73B2008A8EE1 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CE127CDA145F73B2008A8EE1 /* Icon.png */; };
+		CE127CE6145F763C008A8EE1 /* InboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE127CE5145F763C008A8EE1 /* InboxViewController.m */; };
+		CE127CEB145F791C008A8EE1 /* PlusButton2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE127CEA145F791C008A8EE1 /* PlusButton2@2x.png */; };
+		CE127CEE145F7A4A008A8EE1 /* AlertmeCustomTitleBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE127CEC145F7A4A008A8EE1 /* AlertmeCustomTitleBar@2x.png */; };
+		CE127CEF145F7A4A008A8EE1 /* AlertmeCustomTitleBar.png in Resources */ = {isa = PBXBuildFile; fileRef = CE127CED145F7A4A008A8EE1 /* AlertmeCustomTitleBar.png */; };
+		CE127CF4145F7B5C008A8EE1 /* ReminderStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CE127CF1145F7B5C008A8EE1 /* ReminderStore.m */; };
+		CE127CF5145F7B5C008A8EE1 /* Reminder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE127CF3145F7B5C008A8EE1 /* Reminder.m */; };
+		CE127CF8145F7BF7008A8EE1 /* FileHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = CE127CF7145F7BF7008A8EE1 /* FileHelpers.m */; };
+		CE127CFC145F7D66008A8EE1 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE127CFA145F7D65008A8EE1 /* EditViewController.m */; };
+		CE127D00145F7F93008A8EE1 /* EditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE127CFF145F7F93008A8EE1 /* EditViewController.xib */; };
+		CE127D02145F80AA008A8EE1 /* NoRemindersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE127D01145F80AA008A8EE1 /* NoRemindersView.xib */; };
+		CE127D04145F894E008A8EE1 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE127D03145F894D008A8EE1 /* CustomCell.xib */; };
+		CE127D07145F898D008A8EE1 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE127D06145F898D008A8EE1 /* CustomCell.m */; };
+		CE478497146482A800E1AD19 /* TempViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE478495146482A800E1AD19 /* TempViewController.m */; };
+		CE478498146482A800E1AD19 /* TempViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE478496146482A800E1AD19 /* TempViewController.xib */; };
+		CE47849B146575AC00E1AD19 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE47849A146575AC00E1AD19 /* CoreLocation.framework */; };
+		CE47849E146584C400E1AD19 /* AlertMeCustomNavBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE47849C146584C400E1AD19 /* AlertMeCustomNavBar@2x.png */; };
+		CE47849F146584C400E1AD19 /* PlusButton3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE47849D146584C400E1AD19 /* PlusButton3@2x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		9D39998A1465EC380017462A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9D5CFDD1146627EB0072C3EE /* AlertMeCustomNavBar2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AlertMeCustomNavBar2@2x.png"; sourceTree = "<group>"; };
+		9D788BD91471E92A00FFC214 /* AlertMeCustomNavBar4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AlertMeCustomNavBar4@2x.png"; sourceTree = "<group>"; };
+		9D8BE50D148422CA00F03A66 /* PlaceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceCell.h; sourceTree = "<group>"; };
+		9D8BE50E148422CA00F03A66 /* PlaceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceCell.m; sourceTree = "<group>"; };
+		9D8BE511148422D400F03A66 /* PlaceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaceCell.xib; sourceTree = "<group>"; };
+		9D8BE513148423EC00F03A66 /* starp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "starp@2x.png"; sourceTree = "<group>"; };
+		9D8BE515148423F500F03A66 /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
+		9DC3B1721484068500213DE6 /* SimpleGeo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SimpleGeo.framework; sourceTree = "<group>"; };
+		9DC3B175148406B100213DE6 /* Credentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Credentials.h; sourceTree = "<group>"; };
+		9DC3B176148407B900213DE6 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		9DC3B178148407C800213DE6 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		9DC3B17A148407D700213DE6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		9DC3B17C148407E200213DE6 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		9DC3B17E148407EE00213DE6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		9DC3B1811484080800213DE6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		9DC3B1851484088F00213DE6 /* SGController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGController.h; sourceTree = "<group>"; };
+		9DC3B1861484088F00213DE6 /* SGController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGController.m; sourceTree = "<group>"; };
+		CE127CBD145F736A008A8EE1 /* AlertMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlertMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE127CC1145F736A008A8EE1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CE127CC3145F736A008A8EE1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CE127CC5145F736A008A8EE1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CE127CC9145F736A008A8EE1 /* AlertMe-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AlertMe-Info.plist"; sourceTree = "<group>"; };
+		CE127CCB145F736A008A8EE1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CE127CCD145F736A008A8EE1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CE127CCF145F736A008A8EE1 /* AlertMe-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AlertMe-Prefix.pch"; sourceTree = "<group>"; };
+		CE127CD0145F736A008A8EE1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CE127CD1145F736A008A8EE1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CE127CD8145F73AD008A8EE1 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
+		CE127CDA145F73B2008A8EE1 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		CE127CE4145F763C008A8EE1 /* InboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InboxViewController.h; sourceTree = "<group>"; };
+		CE127CE5145F763C008A8EE1 /* InboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InboxViewController.m; sourceTree = "<group>"; };
+		CE127CEA145F791C008A8EE1 /* PlusButton2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlusButton2@2x.png"; sourceTree = "<group>"; };
+		CE127CEC145F7A4A008A8EE1 /* AlertmeCustomTitleBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AlertmeCustomTitleBar@2x.png"; sourceTree = "<group>"; };
+		CE127CED145F7A4A008A8EE1 /* AlertmeCustomTitleBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AlertmeCustomTitleBar.png; sourceTree = "<group>"; };
+		CE127CF0145F7B5C008A8EE1 /* ReminderStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReminderStore.h; sourceTree = "<group>"; };
+		CE127CF1145F7B5C008A8EE1 /* ReminderStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderStore.m; sourceTree = "<group>"; };
+		CE127CF2145F7B5C008A8EE1 /* Reminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reminder.h; sourceTree = "<group>"; };
+		CE127CF3145F7B5C008A8EE1 /* Reminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reminder.m; sourceTree = "<group>"; };
+		CE127CF6145F7BF7008A8EE1 /* FileHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileHelpers.h; sourceTree = "<group>"; };
+		CE127CF7145F7BF7008A8EE1 /* FileHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileHelpers.m; sourceTree = "<group>"; };
+		CE127CF9145F7D65008A8EE1 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
+		CE127CFA145F7D65008A8EE1 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
+		CE127CFF145F7F93008A8EE1 /* EditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditViewController.xib; sourceTree = "<group>"; };
+		CE127D01145F80AA008A8EE1 /* NoRemindersView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoRemindersView.xib; sourceTree = "<group>"; };
+		CE127D03145F894D008A8EE1 /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
+		CE127D05145F898C008A8EE1 /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
+		CE127D06145F898D008A8EE1 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
+		CE478494146482A800E1AD19 /* TempViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempViewController.h; sourceTree = "<group>"; };
+		CE478495146482A800E1AD19 /* TempViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempViewController.m; sourceTree = "<group>"; };
+		CE478496146482A800E1AD19 /* TempViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TempViewController.xib; sourceTree = "<group>"; };
+		CE47849A146575AC00E1AD19 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		CE47849C146584C400E1AD19 /* AlertMeCustomNavBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AlertMeCustomNavBar@2x.png"; sourceTree = "<group>"; };
+		CE47849D146584C400E1AD19 /* PlusButton3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlusButton3@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CE127CBA145F736A008A8EE1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9DC3B1831484084600213DE6 /* SimpleGeo.framework in Frameworks */,
+				9DC3B1821484080800213DE6 /* SystemConfiguration.framework in Frameworks */,
+				9DC3B180148407FA00213DE6 /* QuartzCore.framework in Frameworks */,
+				9DC3B17F148407EE00213DE6 /* MapKit.framework in Frameworks */,
+				9DC3B17D148407E200213DE6 /* AddressBook.framework in Frameworks */,
+				9DC3B17B148407D700213DE6 /* CFNetwork.framework in Frameworks */,
+				9DC3B179148407C800213DE6 /* MobileCoreServices.framework in Frameworks */,
+				9DC3B177148407B900213DE6 /* libz.dylib in Frameworks */,
+				9D3999891465EC2C0017462A /* CoreGraphics.framework in Frameworks */,
+				CE47849B146575AC00E1AD19 /* CoreLocation.framework in Frameworks */,
+				CE127CC2145F736A008A8EE1 /* UIKit.framework in Frameworks */,
+				CE127CC4145F736A008A8EE1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CE127CB2145F736A008A8EE1 = {
+			isa = PBXGroup;
+			children = (
+				CE127CC7145F736A008A8EE1 /* AlertMe */,
+				CE127CC0145F736A008A8EE1 /* Frameworks */,
+				CE127CBE145F736A008A8EE1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CE127CBE145F736A008A8EE1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE127CBD145F736A008A8EE1 /* AlertMe.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE127CC0145F736A008A8EE1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9DC3B1811484080800213DE6 /* SystemConfiguration.framework */,
+				9DC3B17E148407EE00213DE6 /* MapKit.framework */,
+				9DC3B17C148407E200213DE6 /* AddressBook.framework */,
+				9DC3B17A148407D700213DE6 /* CFNetwork.framework */,
+				9DC3B178148407C800213DE6 /* MobileCoreServices.framework */,
+				9DC3B176148407B900213DE6 /* libz.dylib */,
+				9DC3B1721484068500213DE6 /* SimpleGeo.framework */,
+				9D39998A1465EC380017462A /* QuartzCore.framework */,
+				CE47849A146575AC00E1AD19 /* CoreLocation.framework */,
+				CE127CC1145F736A008A8EE1 /* UIKit.framework */,
+				CE127CC3145F736A008A8EE1 /* Foundation.framework */,
+				CE127CC5145F736A008A8EE1 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE127CC7145F736A008A8EE1 /* AlertMe */ = {
+			isa = PBXGroup;
+			children = (
+				CE127CD0145F736A008A8EE1 /* AppDelegate.h */,
+				CE127CD1145F736A008A8EE1 /* AppDelegate.m */,
+				CE127CF6145F7BF7008A8EE1 /* FileHelpers.h */,
+				CE127CF7145F7BF7008A8EE1 /* FileHelpers.m */,
+				CE127D05145F898C008A8EE1 /* CustomCell.h */,
+				CE127D06145F898D008A8EE1 /* CustomCell.m */,
+				9D8BE50D148422CA00F03A66 /* PlaceCell.h */,
+				9D8BE50E148422CA00F03A66 /* PlaceCell.m */,
+				9DC3B1851484088F00213DE6 /* SGController.h */,
+				9DC3B1861484088F00213DE6 /* SGController.m */,
+				CE127D09145F8C61008A8EE1 /* ViewControllers */,
+				CE127D08145F8C37008A8EE1 /* Model */,
+				CE127CFE145F7D71008A8EE1 /* Xibs */,
+				CE127CE9145F78D3008A8EE1 /* Images */,
+				CE127CC8145F736A008A8EE1 /* Supporting Files */,
+			);
+			path = AlertMe;
+			sourceTree = "<group>";
+		};
+		CE127CC8145F736A008A8EE1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9DC3B175148406B100213DE6 /* Credentials.h */,
+				CE127CC9145F736A008A8EE1 /* AlertMe-Info.plist */,
+				CE127CCA145F736A008A8EE1 /* InfoPlist.strings */,
+				CE127CCD145F736A008A8EE1 /* main.m */,
+				CE127CCF145F736A008A8EE1 /* AlertMe-Prefix.pch */,
+				CE127CDA145F73B2008A8EE1 /* Icon.png */,
+				CE127CD8145F73AD008A8EE1 /* Icon@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CE127CE9145F78D3008A8EE1 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				9D8BE515148423F500F03A66 /* star@2x.png */,
+				9D8BE513148423EC00F03A66 /* starp@2x.png */,
+				9D788BD91471E92A00FFC214 /* AlertMeCustomNavBar4@2x.png */,
+				9D5CFDD1146627EB0072C3EE /* AlertMeCustomNavBar2@2x.png */,
+				CE47849C146584C400E1AD19 /* AlertMeCustomNavBar@2x.png */,
+				CE47849D146584C400E1AD19 /* PlusButton3@2x.png */,
+				CE127CEA145F791C008A8EE1 /* PlusButton2@2x.png */,
+				CE127CEC145F7A4A008A8EE1 /* AlertmeCustomTitleBar@2x.png */,
+				CE127CED145F7A4A008A8EE1 /* AlertmeCustomTitleBar.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		CE127CFE145F7D71008A8EE1 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				CE127CFF145F7F93008A8EE1 /* EditViewController.xib */,
+				CE127D01145F80AA008A8EE1 /* NoRemindersView.xib */,
+				CE127D03145F894D008A8EE1 /* CustomCell.xib */,
+				9D8BE511148422D400F03A66 /* PlaceCell.xib */,
+				CE478496146482A800E1AD19 /* TempViewController.xib */,
+			);
+			name = Xibs;
+			sourceTree = "<group>";
+		};
+		CE127D08145F8C37008A8EE1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CE127CF0145F7B5C008A8EE1 /* ReminderStore.h */,
+				CE127CF1145F7B5C008A8EE1 /* ReminderStore.m */,
+				CE127CF2145F7B5C008A8EE1 /* Reminder.h */,
+				CE127CF3145F7B5C008A8EE1 /* Reminder.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		CE127D09145F8C61008A8EE1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CE127CE4145F763C008A8EE1 /* InboxViewController.h */,
+				CE127CE5145F763C008A8EE1 /* InboxViewController.m */,
+				CE127CF9145F7D65008A8EE1 /* EditViewController.h */,
+				CE127CFA145F7D65008A8EE1 /* EditViewController.m */,
+				CE478494146482A800E1AD19 /* TempViewController.h */,
+				CE478495146482A800E1AD19 /* TempViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CE127CBC145F736A008A8EE1 /* AlertMe */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE127CD5145F736A008A8EE1 /* Build configuration list for PBXNativeTarget "AlertMe" */;
+			buildPhases = (
+				CE127CB9145F736A008A8EE1 /* Sources */,
+				CE127CBA145F736A008A8EE1 /* Frameworks */,
+				CE127CBB145F736A008A8EE1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AlertMe;
+			productName = AlertMe;
+			productReference = CE127CBD145F736A008A8EE1 /* AlertMe.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CE127CB4145F736A008A8EE1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = CE127CB7145F736A008A8EE1 /* Build configuration list for PBXProject "AlertMe" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CE127CB2145F736A008A8EE1;
+			productRefGroup = CE127CBE145F736A008A8EE1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CE127CBC145F736A008A8EE1 /* AlertMe */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CE127CBB145F736A008A8EE1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE127CCC145F736A008A8EE1 /* InfoPlist.strings in Resources */,
+				CE127CD9145F73AD008A8EE1 /* Icon@2x.png in Resources */,
+				CE127CDB145F73B2008A8EE1 /* Icon.png in Resources */,
+				CE127CEB145F791C008A8EE1 /* PlusButton2@2x.png in Resources */,
+				CE127CEE145F7A4A008A8EE1 /* AlertmeCustomTitleBar@2x.png in Resources */,
+				CE127CEF145F7A4A008A8EE1 /* AlertmeCustomTitleBar.png in Resources */,
+				CE127D00145F7F93008A8EE1 /* EditViewController.xib in Resources */,
+				CE127D02145F80AA008A8EE1 /* NoRemindersView.xib in Resources */,
+				CE127D04145F894E008A8EE1 /* CustomCell.xib in Resources */,
+				CE478498146482A800E1AD19 /* TempViewController.xib in Resources */,
+				CE47849E146584C400E1AD19 /* AlertMeCustomNavBar@2x.png in Resources */,
+				CE47849F146584C400E1AD19 /* PlusButton3@2x.png in Resources */,
+				9D5CFDD2146627EB0072C3EE /* AlertMeCustomNavBar2@2x.png in Resources */,
+				9D788BDA1471E92A00FFC214 /* AlertMeCustomNavBar4@2x.png in Resources */,
+				9D8BE512148422D400F03A66 /* PlaceCell.xib in Resources */,
+				9D8BE514148423EC00F03A66 /* starp@2x.png in Resources */,
+				9D8BE516148423F500F03A66 /* star@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CE127CB9145F736A008A8EE1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE127CCE145F736A008A8EE1 /* main.m in Sources */,
+				CE127CD2145F736A008A8EE1 /* AppDelegate.m in Sources */,
+				CE127CE6145F763C008A8EE1 /* InboxViewController.m in Sources */,
+				CE127CF4145F7B5C008A8EE1 /* ReminderStore.m in Sources */,
+				CE127CF5145F7B5C008A8EE1 /* Reminder.m in Sources */,
+				CE127CF8145F7BF7008A8EE1 /* FileHelpers.m in Sources */,
+				CE127CFC145F7D66008A8EE1 /* EditViewController.m in Sources */,
+				CE127D07145F898D008A8EE1 /* CustomCell.m in Sources */,
+				CE478497146482A800E1AD19 /* TempViewController.m in Sources */,
+				9DC3B1871484088F00213DE6 /* SGController.m in Sources */,
+				9D8BE50F148422CA00F03A66 /* PlaceCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CE127CCA145F736A008A8EE1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE127CCB145F736A008A8EE1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CE127CD3145F736A008A8EE1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CE127CD4145F736A008A8EE1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CE127CD6145F736A008A8EE1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_DIR)/Xcode Projects/iOS/AlertMe New/AlertMe2\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AlertMe/AlertMe-Prefix.pch";
+				INFOPLIST_FILE = "AlertMe/AlertMe-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CE127CD7145F736A008A8EE1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_DIR)/Xcode Projects/iOS/AlertMe New/AlertMe2\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AlertMe/AlertMe-Prefix.pch";
+				INFOPLIST_FILE = "AlertMe/AlertMe-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CE127CB7145F736A008A8EE1 /* Build configuration list for PBXProject "AlertMe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE127CD3145F736A008A8EE1 /* Debug */,
+				CE127CD4145F736A008A8EE1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE127CD5145F736A008A8EE1 /* Build configuration list for PBXNativeTarget "AlertMe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE127CD6145F736A008A8EE1 /* Debug */,
+				CE127CD7145F736A008A8EE1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CE127CB4145F736A008A8EE1 /* Project object */;
+}
