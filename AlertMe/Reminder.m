@@ -39,6 +39,7 @@
         [self setIsLocationBased:[decoder decodeBoolForKey:@"isLocationBased"]];
         [self setLatitude:[decoder decodeDoubleForKey:@"latitude"]];
         [self setLatitude:[decoder decodeDoubleForKey:@"longitude"]];
+        [self setLocationString:[decoder decodeObjectForKey:@"locationString"]];
     }
     return self;
 }
@@ -73,6 +74,7 @@
     [encoder encodeBool:isLocationBased forKey:@"isLoactionBased"];
     [encoder encodeDouble:latitude forKey:@"latitude"];
     [encoder encodeDouble:longitude forKey:@"longitude"];
+    [encoder encodeObject:locationString forKey:@"locationString"];
 }
 
 @end

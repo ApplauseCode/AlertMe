@@ -15,6 +15,8 @@
 @interface InboxViewController() 
 
 @property (retain, nonatomic) IBOutlet UIView *noReminderView;
+@property (retain, nonatomic) IBOutlet UIView *bgView;
+
 @property (assign, nonatomic) BOOL editing;
 
 @end
@@ -22,6 +24,7 @@
 @implementation InboxViewController
 
 @synthesize noReminderView;
+@synthesize bgView;
 @synthesize edit_vc2;
 @synthesize editing;
 
@@ -30,6 +33,7 @@
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
         [[NSBundle mainBundle] loadNibNamed:@"NoRemindersView" owner:self options:nil];
+        [[NSBundle mainBundle] loadNibNamed:@"BGView" owner:self options:nil];
         [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(update:) userInfo:nil repeats:YES]; 
     }
     return self;
@@ -66,7 +70,11 @@
 {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
-    [[self tableView] setRowHeight:53];
+    [[self tableView] setRowHeight:58];
+    UIView *footer =
+    [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.tableFooterView = footer;
+    [footer release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -94,6 +102,8 @@
         [noReminderView removeFromSuperview];
         [self.tableView setScrollEnabled:YES];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        tableView.separatorColor = [UIColor blackColor];
+        [[self tableView] setBackgroundView:bgView];
     }
     return [[rs allReminders] count];
 }
@@ -111,12 +121,15 @@
     }
     cell.reminderLabel.text = [[[rs allReminders] objectAtIndex:[indexPath row]] text];
     cell.detailLabel.text = [[[rs allReminders] objectAtIndex:[indexPath row]] timeToExpiration];
+    cell.contentView.backgroundColor = [UIColor whiteColor];
     return cell;
 }
 
+
+
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 53;
+    return 58;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath

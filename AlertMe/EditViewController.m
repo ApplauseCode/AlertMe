@@ -126,6 +126,7 @@
         [datePicker setDate:[reminder endDate]];
         [reminderField setText:[reminder text]];
     }
+    locationField.enabled = NO;
 }
 
 - (void)locationManager:(CLLocationManager *)manager 
@@ -228,32 +229,25 @@
     return cell;
 }
 
-/*
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CLGeocoder *geoCoder = [[[CLGeocoder alloc] init] autorelease];
+    [doneButton setEnabled:YES];
+    NSLog(@"%@", [[fetchedPlaces objectAtIndex:[indexPath row]] point]);
     
-    locationString = [[NSString alloc] init];
-    locationString = [[fetchedPlaces objectAtIndex:[indexPath row]] name];
+    latitude = [[[fetchedPlaces objectAtIndex:[indexPath row]] point] latitude];
+    longitude = [[[fetchedPlaces objectAtIndex:[indexPath row]] point] longitude];
     
-    [geoCoder geocodeAddressString:locationString completionHandler:^(NSArray *placemarks, NSError *error) {
-        NSLog(@"reverseGeocodeLocation:completionHandler: Completion Handler called!");
-        if (error){
-            NSLog(@"Geocode failed with error: %@", error);
-            [self displayError:error];
-            return;
-        }
-        NSLog(@"Received placemarks: %@", placemarks);
-        
-        CLPlacemark *topResult = [placemarks objectAtIndex:0];
-        
-        NSLog(topResult);
-    }];
-
+    NSLog(@"%f", latitude);
+    NSLog(@"%f", longitude);
+    
+    [reminder setLatitude:latitude];
+    [reminder setLongitude:longitude];
+    [reminder setIsLocationBased:YES];
+    [reminder setEndDate:nil];
+    
 }
-*/
 
-//testing github3
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)aSearchBar
 {
@@ -301,10 +295,43 @@
         reminderNotification.applicationIconBadgeNumber = -1;
     }
     else {
-        // set location
+        if ([CLLocationManager regionMonitoringAvailable]) {
+            // Create a new region based on the center of the map view.
+            CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(latitude, longitude);
+            NSString *regionID = [NSString stringWithFormat:@"%f, %f", latitude, longitude];
+            CLRegion *newRegion = [[CLRegion alloc] initCircularRegionWithCenter:coord 
+                                                                          radius:100.0 
+                                                                      identifier:regionID];
+            
+            // Start monitoring the newly created region.
+            [locationManager startMonitoringForRegion:newRegion desiredAccuracy:kCLLocationAccuracyBest];
+            
+            [newRegion release];
+        }
+        else {
+            NSLog(@"Region monitoring is not available.");
+        }
+        [rs saveReminder:reminder];
     }
     [[UIApplication sharedApplication] scheduleLocalNotification:reminderNotification];
 
+}
+
+- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region  {
+	//NSString *event = [NSString stringWithFormat:@"didEnterRegion %@ at %@", region.identifier, [NSDate date]];
+	//[self updateWithEvent:event];
+    
+    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    localNotif.alertBody = reminder.text;
+    localNotif.alertAction = @"View";
+    localNotif.soundName = UILocalNotificationDefaultSoundName;
+    localNotif.applicationIconBadgeNumber = -1;
+    [[UIApplication sharedApplication] presentLocalNotificationNow:localNotif];
+    [localNotif release];
+    
+    //[locationAlert show];
+    //[locationAlert release];
+    
 }
 
 - (IBAction)dismissEditView:(id)sender 
