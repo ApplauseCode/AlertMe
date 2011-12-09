@@ -137,6 +137,8 @@
     [[UIApplication sharedApplication] presentLocalNotificationNow:localNotif];
     [localNotif release];
     
+    NSLog(@"YAY! Teleporation successful");
+    
     //[locationAlert show];
     //[locationAlert release];
 

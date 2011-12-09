@@ -17,6 +17,7 @@
 @property (nonatomic, assign) double longitude;
 @property (nonatomic, retain) NSString *locationString;
 @property (nonatomic) BOOL isLocationBased;
+@property (nonatomic, retain) CLRegion *aRegion;
 
 - (NSString *) timeToExpiration;
 

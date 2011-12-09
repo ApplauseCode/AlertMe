@@ -148,8 +148,6 @@
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
     } 
-    //	[locationManager stopMonitoringForRegion:<region from reminderStore>];
-
 }
 
 #pragma mark - Table view delegate

@@ -16,6 +16,7 @@
 @synthesize latitude;
 @synthesize longitude;
 @synthesize locationString;
+@synthesize aRegion;
 
 - (id)init
 {
@@ -40,6 +41,7 @@
         [self setLatitude:[decoder decodeDoubleForKey:@"latitude"]];
         [self setLatitude:[decoder decodeDoubleForKey:@"longitude"]];
         [self setLocationString:[decoder decodeObjectForKey:@"locationString"]];
+        [self setARegion:[decoder decodeObjectForKey:@"aRegion"]];
     }
     return self;
 }
@@ -75,6 +77,7 @@
     [encoder encodeDouble:latitude forKey:@"latitude"];
     [encoder encodeDouble:longitude forKey:@"longitude"];
     [encoder encodeObject:locationString forKey:@"locationString"];
+    [encoder encodeObject:aRegion forKey:@"aRegion"];
 }
 
 @end

@@ -271,8 +271,7 @@
         reminder.endDate = datePicker.date;
         reminder.text = reminderField.text;
         [rs replaceReminder:reminder index:reminderIndex];
-    }
-    else {
+    } /*else {
         //reminder.startDate = [NSDate date];
         reminder.endDate = datePicker.date;
         reminder.text = reminderField.text;
@@ -280,10 +279,11 @@
         [reminder setLatitude:0.0];
         [reminder setLongitude:0.0];
         [rs saveReminder:reminder];
-    }
+    }*/
     
     //[self.navigationController popViewControllerAnimated:YES];
     [self dismissModalViewControllerAnimated:YES];
+    reminder.text = reminderField.text;
     
     if (![reminder isLocationBased]) {
         reminderNotification = [[UILocalNotification alloc] init];
@@ -293,8 +293,13 @@
         reminderNotification.alertAction = @"View";
         reminderNotification.soundName = UILocalNotificationDefaultSoundName;
         reminderNotification.applicationIconBadgeNumber = -1;
-    }
-    else {
+        
+        reminder.endDate = datePicker.date;
+        [reminder setIsLocationBased:NO];
+        [reminder setLatitude:0.0];
+        [reminder setLongitude:0.0];
+        [[UIApplication sharedApplication] scheduleLocalNotification:reminderNotification];
+    } else {
         if ([CLLocationManager regionMonitoringAvailable]) {
             // Create a new region based on the center of the map view.
             CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(latitude, longitude);
@@ -305,16 +310,14 @@
             
             // Start monitoring the newly created region.
             [locationManager startMonitoringForRegion:newRegion desiredAccuracy:kCLLocationAccuracyBest];
-            
+            [reminder setARegion:newRegion];
             [newRegion release];
-        }
-        else {
+        } else {
             NSLog(@"Region monitoring is not available.");
         }
-        [rs saveReminder:reminder];
+        //reminder.endDate = [NSString stringWithFormat:@"%i", latitude];
     }
-    [[UIApplication sharedApplication] scheduleLocalNotification:reminderNotification];
-
+    [rs saveReminder:reminder];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region  {
@@ -328,6 +331,8 @@
     localNotif.applicationIconBadgeNumber = -1;
     [[UIApplication sharedApplication] presentLocalNotificationNow:localNotif];
     [localNotif release];
+    
+    NSLog(@"YAY! Teleporation successful");
     
     //[locationAlert show];
     //[locationAlert release];
