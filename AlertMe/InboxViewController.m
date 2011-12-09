@@ -11,6 +11,7 @@
 #import "ReminderStore.h"
 #import "Reminder.h"
 #import "CustomCell.h"
+#import "AppDelegate.h"
 
 @interface InboxViewController() 
 
@@ -134,6 +135,7 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    CLLocationManager *locationManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] clloc];
     ReminderStore *rs = [ReminderStore defaultStore];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         Reminder *r = [[rs allReminders] objectAtIndex:[indexPath row]];
@@ -145,6 +147,8 @@
         }
         [[rs allReminders] removeObjectAtIndex:[indexPath row]];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
+        if ([r isLocationBased])
+             [locationManager stopMonitoringForRegion:[r aRegion]];
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
     } 

@@ -9,6 +9,7 @@
 #import "TempViewController.h"
 #import "Reminder.h"
 #import "ReminderStore.h"
+#import "AppDelegate.h"
 
 @implementation TempViewController
 @synthesize reminderField;
@@ -42,12 +43,12 @@
     [super viewDidLoad];
     
     // Create location manager with filters set for battery efficiency.
-	locationManager = [[CLLocationManager alloc] init];
+	locationManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] clloc];
 	locationManager.delegate = self;
 	locationManager.distanceFilter = kCLLocationAccuracyHundredMeters;
 	locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     
-    [[[UIApplication sharedApplication] delegate] setClloc:locationManager];
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] setClloc:locationManager];
 	
 	// Start updating location changes.
 	[locationManager startUpdatingLocation];

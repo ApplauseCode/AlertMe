@@ -11,6 +11,7 @@
 #import "Reminder.h"
 #import "TempViewController.h"
 #import "PlaceCell.h"
+#import "AppDelegate.h"
 
 @interface EditViewController()
 
@@ -259,6 +260,7 @@
 - (IBAction)addReminder:(id)sender 
 {
     ReminderStore *rs = [ReminderStore defaultStore];
+    [reminder setIsLocationBased:NO];
     
     if (!isNewReminder) {        
         NSArray *allNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
@@ -293,9 +295,9 @@
         reminderNotification.alertAction = @"View";
         reminderNotification.soundName = UILocalNotificationDefaultSoundName;
         reminderNotification.applicationIconBadgeNumber = -1;
+        NSLog(@"notification registered");
         
         reminder.endDate = datePicker.date;
-        [reminder setIsLocationBased:NO];
         [reminder setLatitude:0.0];
         [reminder setLongitude:0.0];
         [[UIApplication sharedApplication] scheduleLocalNotification:reminderNotification];
