@@ -12,5 +12,7 @@
 
 @property (retain, nonatomic) UIWindow *window;
 @property (retain, nonatomic) CLLocationManager *clloc;
+@property (nonatomic, retain) UIImageView *topBarView;
+@property (nonatomic, retain) UIImageView *bottomBarView;
 
 @end

@@ -16,6 +16,8 @@
 @interface EditViewController()
 
 @property (nonatomic, retain) UILocalNotification *reminderNotification;
+@property (nonatomic, retain) UIImageView *topBarView2;
+@property (nonatomic, retain) UIImageView *bottomBarView2;
 
 @end
 
@@ -40,6 +42,8 @@
 @synthesize latitude;
 @synthesize longitude;
 @synthesize fetchedPlaces;
+@synthesize topBarView2;
+@synthesize bottomBarView2;
 
 
 - (id) init
@@ -117,7 +121,7 @@
         [doneButton setEnabled:NO];
     if(!reminder) {
         reminder = [[Reminder alloc] init];        
-        [reminderField becomeFirstResponder];
+        //[reminderField becomeFirstResponder];
         datePicker.date = [NSDate date];
         datePicker.minimumDate = [NSDate date];
         datePicker.maximumDate = nil;
@@ -128,6 +132,29 @@
         [reminderField setText:[reminder text]];
     }
     locationField.enabled = NO;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    UIImage *topBar = [UIImage imageNamed:@"top"];
+    topBarView2 = [[UIImageView alloc] initWithImage:topBar];
+    [topBarView2 setFrame:CGRectMake(0, 0, topBarView2.frame.size.width, topBarView2.frame.size.height)];
+    [[self view] addSubview:topBarView2];
+    
+    UIImage *bottomBar = [UIImage imageNamed:@"bottom"];
+    bottomBarView2 = [[UIImageView alloc] initWithImage:bottomBar];
+    [bottomBarView2 setFrame:CGRectMake(0, 230, bottomBarView2.frame.size.width, bottomBarView2.frame.size.height)];
+    [[self view] addSubview:bottomBarView2];
+    
+    [UIView animateWithDuration:.5 delay:0 options:0 animations:^{
+        [bottomBarView2 setFrame:CGRectMake(bottomBarView2.frame.origin.x, 416, bottomBarView2.frame.size.width, bottomBarView2.frame.size.height)];
+    } completion:^(BOOL finished){
+    }];
+    
+    [UIView animateWithDuration:.5 delay:0 options:0 animations:^{
+        [topBarView2 setFrame:CGRectMake(topBarView2.frame.origin.x, -186, topBarView2.frame.size.width, topBarView2.frame.size.height)];
+    } completion:^(BOOL finished){
+    }];
 }
 
 - (void)locationManager:(CLLocationManager *)manager 
@@ -284,10 +311,12 @@
     }*/
     
     //[self.navigationController popViewControllerAnimated:YES];
-    [self dismissModalViewControllerAnimated:YES];
+    //[self dismissModalViewControllerAnimated:YES];
+    [self dismissEditView:nil];
     reminder.text = reminderField.text;
     
     if (![reminder isLocationBased]) {
+        reminder.endDate = datePicker.date;
         reminderNotification = [[UILocalNotification alloc] init];
         reminderNotification.fireDate = reminder.endDate;
         reminderNotification.timeZone = [NSTimeZone defaultTimeZone];
@@ -296,8 +325,7 @@
         reminderNotification.soundName = UILocalNotificationDefaultSoundName;
         reminderNotification.applicationIconBadgeNumber = -1;
         NSLog(@"notification registered");
-        
-        reminder.endDate = datePicker.date;
+    
         [reminder setLatitude:0.0];
         [reminder setLongitude:0.0];
         [[UIApplication sharedApplication] scheduleLocalNotification:reminderNotification];
@@ -343,7 +371,28 @@
 
 - (IBAction)dismissEditView:(id)sender 
 {
-    [self dismissModalViewControllerAnimated:YES];
+    
+    [UIView animateWithDuration:.5 delay:0 options:0 animations:^{
+        [topBarView2 setFrame:CGRectMake(topBarView2.frame.origin.x, 0, topBarView2.frame.size.width, topBarView2.frame.size.height)];
+    } completion:^(BOOL finished){
+        [self dismissModalViewControllerAnimated:NO];
+        
+        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+        [UIView animateWithDuration:.5 delay:0 options:0 animations:^{
+            [delegate.topBarView setFrame:CGRectMake(delegate.topBarView.frame.origin.x, -166, delegate.topBarView.frame.size.width, delegate.topBarView.frame.size.height)];
+        } completion:^(BOOL finished){
+        }];
+        [UIView animateWithDuration:.5 delay:0 options:0 animations:^{
+            [delegate.bottomBarView setFrame:CGRectMake(delegate.bottomBarView.frame.origin.x, 432, delegate.bottomBarView.frame.size.width, delegate.bottomBarView.frame.size.height)];
+        } completion:^(BOOL finished){
+        }];
+    }];
+    
+    [UIView animateWithDuration:.5 delay:0 options:0 animations:^{
+        [bottomBarView2 setFrame:CGRectMake(bottomBarView2.frame.origin.x, 230, bottomBarView2.frame.size.width, bottomBarView2.frame.size.height)];
+    } completion:^(BOOL finished){
+    }];
+
 }
 
 - (IBAction)textFieldDidEndEditing:(UITextField *)field

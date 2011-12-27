@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9D3999891465EC2C0017462A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE127CC5145F736A008A8EE1 /* CoreGraphics.framework */; };
-		9D5CFDD2146627EB0072C3EE /* AlertMeCustomNavBar2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D5CFDD1146627EB0072C3EE /* AlertMeCustomNavBar2@2x.png */; };
+		9D6FCA7714A7FAC500177D3E /* top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D6FCA7614A7FAC500177D3E /* top@2x.png */; };
+		9D6FCA7914A83EB100177D3E /* bottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D6FCA7814A83EB100177D3E /* bottom@2x.png */; };
 		9D788BDA1471E92A00FFC214 /* AlertMeCustomNavBar4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D788BD91471E92A00FFC214 /* AlertMeCustomNavBar4@2x.png */; };
 		9D8BE50F148422CA00F03A66 /* PlaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8BE50E148422CA00F03A66 /* PlaceCell.m */; };
 		9D8BE512148422D400F03A66 /* PlaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8BE511148422D400F03A66 /* PlaceCell.xib */; };
@@ -25,6 +26,7 @@
 		9DC3B1821484080800213DE6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC3B1811484080800213DE6 /* SystemConfiguration.framework */; };
 		9DC3B1831484084600213DE6 /* SimpleGeo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC3B1721484068500213DE6 /* SimpleGeo.framework */; };
 		9DC3B1871484088F00213DE6 /* SGController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC3B1861484088F00213DE6 /* SGController.m */; };
+		9DE5019A14A7EC8D0025548C /* AlertMeCustomNavBar2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DE5019914A7EC8D0025548C /* AlertMeCustomNavBar2@2x.png */; };
 		9DEE1E2E14918DC600D7FAA8 /* Location.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 9DEE1E2D14918DC600D7FAA8 /* Location.gpx */; };
 		CE127CC2145F736A008A8EE1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE127CC1145F736A008A8EE1 /* UIKit.framework */; };
 		CE127CC4145F736A008A8EE1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE127CC3145F736A008A8EE1 /* Foundation.framework */; };
@@ -48,13 +50,13 @@
 		CE478497146482A800E1AD19 /* TempViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE478495146482A800E1AD19 /* TempViewController.m */; };
 		CE478498146482A800E1AD19 /* TempViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE478496146482A800E1AD19 /* TempViewController.xib */; };
 		CE47849B146575AC00E1AD19 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE47849A146575AC00E1AD19 /* CoreLocation.framework */; };
-		CE47849E146584C400E1AD19 /* AlertMeCustomNavBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE47849C146584C400E1AD19 /* AlertMeCustomNavBar@2x.png */; };
 		CE47849F146584C400E1AD19 /* PlusButton3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE47849D146584C400E1AD19 /* PlusButton3@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9D39998A1465EC380017462A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		9D5CFDD1146627EB0072C3EE /* AlertMeCustomNavBar2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AlertMeCustomNavBar2@2x.png"; sourceTree = "<group>"; };
+		9D6FCA7614A7FAC500177D3E /* top@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top@2x.png"; sourceTree = "<group>"; };
+		9D6FCA7814A83EB100177D3E /* bottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bottom@2x.png"; sourceTree = "<group>"; };
 		9D788BD91471E92A00FFC214 /* AlertMeCustomNavBar4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AlertMeCustomNavBar4@2x.png"; sourceTree = "<group>"; };
 		9D8BE50D148422CA00F03A66 /* PlaceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceCell.h; sourceTree = "<group>"; };
 		9D8BE50E148422CA00F03A66 /* PlaceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceCell.m; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 		9DC3B1811484080800213DE6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		9DC3B1851484088F00213DE6 /* SGController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGController.h; sourceTree = "<group>"; };
 		9DC3B1861484088F00213DE6 /* SGController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGController.m; sourceTree = "<group>"; };
+		9DE5019914A7EC8D0025548C /* AlertMeCustomNavBar2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AlertMeCustomNavBar2@2x.png"; sourceTree = "<group>"; };
 		9DEE1E2D14918DC600D7FAA8 /* Location.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = "<group>"; };
 		CE127CBD145F736A008A8EE1 /* AlertMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlertMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE127CC1145F736A008A8EE1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -108,7 +111,6 @@
 		CE478495146482A800E1AD19 /* TempViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempViewController.m; sourceTree = "<group>"; };
 		CE478496146482A800E1AD19 /* TempViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TempViewController.xib; sourceTree = "<group>"; };
 		CE47849A146575AC00E1AD19 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		CE47849C146584C400E1AD19 /* AlertMeCustomNavBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AlertMeCustomNavBar@2x.png"; sourceTree = "<group>"; };
 		CE47849D146584C400E1AD19 /* PlusButton3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlusButton3@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -211,12 +213,13 @@
 		CE127CE9145F78D3008A8EE1 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9D6FCA7614A7FAC500177D3E /* top@2x.png */,
+				9D6FCA7814A83EB100177D3E /* bottom@2x.png */,
 				9DB66877148EFF7100B92006 /* cellBG.png */,
 				9D8BE515148423F500F03A66 /* star@2x.png */,
 				9D8BE513148423EC00F03A66 /* starp@2x.png */,
 				9D788BD91471E92A00FFC214 /* AlertMeCustomNavBar4@2x.png */,
-				9D5CFDD1146627EB0072C3EE /* AlertMeCustomNavBar2@2x.png */,
-				CE47849C146584C400E1AD19 /* AlertMeCustomNavBar@2x.png */,
+				9DE5019914A7EC8D0025548C /* AlertMeCustomNavBar2@2x.png */,
 				CE47849D146584C400E1AD19 /* PlusButton3@2x.png */,
 				CE127CEA145F791C008A8EE1 /* PlusButton2@2x.png */,
 				CE127CEC145F7A4A008A8EE1 /* AlertmeCustomTitleBar@2x.png */,
@@ -322,9 +325,7 @@
 				CE127D02145F80AA008A8EE1 /* NoRemindersView.xib in Resources */,
 				CE127D04145F894E008A8EE1 /* CustomCell.xib in Resources */,
 				CE478498146482A800E1AD19 /* TempViewController.xib in Resources */,
-				CE47849E146584C400E1AD19 /* AlertMeCustomNavBar@2x.png in Resources */,
 				CE47849F146584C400E1AD19 /* PlusButton3@2x.png in Resources */,
-				9D5CFDD2146627EB0072C3EE /* AlertMeCustomNavBar2@2x.png in Resources */,
 				9D788BDA1471E92A00FFC214 /* AlertMeCustomNavBar4@2x.png in Resources */,
 				9D8BE512148422D400F03A66 /* PlaceCell.xib in Resources */,
 				9D8BE514148423EC00F03A66 /* starp@2x.png in Resources */,
@@ -332,6 +333,9 @@
 				9DB66878148EFF7100B92006 /* cellBG.png in Resources */,
 				9DB6687B148F05D900B92006 /* BGView.xib in Resources */,
 				9DEE1E2E14918DC600D7FAA8 /* Location.gpx in Resources */,
+				9DE5019A14A7EC8D0025548C /* AlertMeCustomNavBar2@2x.png in Resources */,
+				9D6FCA7714A7FAC500177D3E /* top@2x.png in Resources */,
+				9D6FCA7914A83EB100177D3E /* bottom@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
