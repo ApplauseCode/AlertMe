@@ -104,7 +104,7 @@
         [noReminderView removeFromSuperview];
         [self.tableView setScrollEnabled:YES];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-        tableView.separatorColor = [UIColor blackColor];
+        tableView.separatorColor = [UIColor lightGrayColor];
         [[self tableView] setBackgroundView:bgView];
     }
     return [[rs allReminders] count];
@@ -122,7 +122,12 @@
                 cell = (CustomCell *)oneObject;
     }
     cell.reminderLabel.text = [[[rs allReminders] objectAtIndex:[indexPath row]] text];
+    if ([[[rs allReminders] objectAtIndex:[indexPath row]] isLocationBased]) {
+        cell.detailLabel.text = [NSString stringWithFormat:@"Launches at %@", [[[rs allReminders] objectAtIndex:[indexPath row]] locationString]];
+    }
+    else {
     cell.detailLabel.text = [[[rs allReminders] objectAtIndex:[indexPath row]] timeToExpiration];
+    }
     cell.contentView.backgroundColor = [UIColor whiteColor];
     return cell;
 }
@@ -146,10 +151,12 @@
                 [[UIApplication sharedApplication] cancelLocalNotification:notification];
             }
         }
+        if ([r isLocationBased]) {
+            NSLog(@"isLocationBased %i", [r isLocationBased]);
+            [locationManager stopMonitoringForRegion:[r aRegion]];
+        }
         [[rs allReminders] removeObjectAtIndex:[indexPath row]];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
-        if ([r isLocationBased])
-             [locationManager stopMonitoringForRegion:[r aRegion]];
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
     } 
@@ -169,7 +176,20 @@
     NSArray *a = [rs allReminders];
     Reminder *reminder = [a objectAtIndex:[indexPath row]];
     [edit_vc2 setReminder:reminder];
-    [self presentModalViewController:edit_vc2 animated:YES];
+    
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [UIView animateWithDuration:.5 delay:0 options:0 animations:^{
+        [delegate.topBarView setFrame:CGRectMake(delegate.topBarView.frame.origin.x, 20, delegate.topBarView.frame.size.width, delegate.topBarView.frame.size.height)];
+    } completion:^(BOOL finished){
+        [self presentModalViewController:edit_vc2 animated:NO];
+    }];
+    
+    [UIView animateWithDuration:.5 delay:0 options:0 animations:^{
+        [delegate.bottomBarView setFrame:CGRectMake(delegate.bottomBarView.frame.origin.x, 250, delegate.bottomBarView.frame.size.width, delegate.bottomBarView.frame.size.height)];
+    } completion:^(BOOL finished){
+    }];
+
+    
 }
 
 - (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath

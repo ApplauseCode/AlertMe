@@ -15,7 +15,7 @@
 
 @class Reminder;
 
-@interface EditViewController : UIViewController <CLLocationManagerDelegate, UIScrollViewDelegate>
+@interface EditViewController : UIViewController <CLLocationManagerDelegate, UIScrollViewDelegate, UITextViewDelegate>
 {
     SGController *simpleGeoController;
     NSString *street;
@@ -35,6 +35,7 @@
 
 @property (retain, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (retain, nonatomic) IBOutlet UITextField *reminderField;
+@property (retain, nonatomic) IBOutlet UITextView *reminderTextView;
 @property (retain, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (retain, nonatomic) IBOutlet UIView *locationView;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *segmentedControl;
@@ -45,12 +46,17 @@
 @property (retain, nonatomic) IBOutlet UISearchBar *placeSearchBar;
 @property (retain, nonatomic) IBOutlet UITextField *locationField;
 @property (retain, nonatomic) IBOutlet UISwitch *currentLocationSwitch;
+@property (retain, nonatomic) IBOutlet UILabel *dateLabel;
+@property (retain, nonatomic) IBOutlet UIView *dateButtonView;
 
 - (IBAction)addReminder:(id)sender;
 - (IBAction)dismissEditView:(id)sender;
 - (IBAction)textFieldDidEndEditing:(UITextField *)field;
 - (IBAction)timeOrLocationChanged:(id)sender;
 - (IBAction)useLocationSwitched:(id)sender;
+- (IBAction)popDatePicker:(id)sender;
+- (IBAction)textFieldDidBeginEditing:(id)sender;
+- (IBAction)dateChanged:(id)sender;
 
 
 @end

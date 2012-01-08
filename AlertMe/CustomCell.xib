@@ -57,7 +57,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">cellBG.png</string>
+									<string key="NSResourceName">cellBG2.png</string>
 								</object>
 							</object>
 							<object class="IBUILabel" id="858208542">
@@ -76,7 +76,7 @@
 								<string key="IBUIText">Buy Toothepaste</string>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC45MDE5NjA3OTAyIDAuOTAxOTYwNzkwMiAwLjkwMTk2MDc5MDIAA</bytes>
+									<bytes key="NSRGB">MCAwIDAAA</bytes>
 								</object>
 								<object class="NSColor" key="IBUIHighlightedColor" id="697835327">
 									<int key="NSColorSpace">3</int>
@@ -154,6 +154,7 @@
 				<string key="NSReuseIdentifierKey">_NS:358</string>
 				<reference key="IBUIBackgroundColor" ref="697835327"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<int key="IBUISelectionStyle">2</int>
 				<reference key="IBUIContentView" ref="154637672"/>
 				<real value="63" key="IBUIRowHeight"/>
 			</object>
@@ -323,7 +324,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">cellBG.png</string>
+			<string key="NS.key.0">cellBG2.png</string>
 			<string key="NS.object.0">{640, 106}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>

@@ -72,10 +72,11 @@
     topBarView = [[UIImageView alloc] initWithImage:topBar];
     [topBarView setFrame:CGRectMake(0, -166, topBarView.frame.size.width, topBarView.frame.size.height)];
     [[nav view] addSubview:topBarView];
+    [topBarView setHidden:YES];
     
-    UIImage *bottomBar = [UIImage imageNamed:@"bottom"];
+    UIImage *bottomBar = [UIImage imageNamed:@"bottomTab"];
     bottomBarView = [[UIImageView alloc] initWithImage:bottomBar];
-    [bottomBarView setFrame:CGRectMake(0, 432, bottomBarView.frame.size.width, bottomBarView.frame.size.height)];
+    [bottomBarView setFrame:CGRectMake(0, 520, bottomBarView.frame.size.width, bottomBarView.frame.size.height)];
     [[nav view] addSubview:bottomBarView];
     
     [[self window] setRootViewController:nav];
@@ -98,6 +99,7 @@
     if (edit_vc) {
         [edit_vc release];
     }
+    [topBarView setHidden:NO];
     edit_vc = [[EditViewController alloc] init];
     [edit_vc setIsNewReminder:YES];
     [UIView animateWithDuration:.5 delay:0 options:0 animations:^{

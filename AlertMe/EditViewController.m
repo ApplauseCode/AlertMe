@@ -28,6 +28,7 @@
 @synthesize reminderIndex;
 @synthesize datePicker;
 @synthesize reminderField;
+@synthesize reminderTextView;
 @synthesize doneButton;
 @synthesize locationView;
 @synthesize reminderNotification;
@@ -38,6 +39,8 @@
 @synthesize placeSearchBar;
 @synthesize locationField;
 @synthesize currentLocationSwitch;
+@synthesize dateLabel;
+@synthesize dateButtonView;
 @synthesize segmentedControl;
 @synthesize latitude;
 @synthesize longitude;
@@ -64,6 +67,7 @@
 - (IBAction)timeOrLocationChanged:(id)sender 
 {
     [locationView setHidden:![sender selectedSegmentIndex]];
+    [dateButtonView setHidden:[sender selectedSegmentIndex]];
     [datePicker setHidden:[sender selectedSegmentIndex]];
    // [locationField enabled: [sender selectedSegmentIndex]];
     
@@ -95,6 +99,8 @@
 {
     [super viewDidLoad];
     [locationView  setHidden:YES];
+    [locationView setFrame:CGRectMake(0, 96, 320, 150)];
+    [[self view] addSubview:locationView];
 }
 
 - (void)viewDidUnload
@@ -108,6 +114,9 @@
     [self setPlaceSearchBar:nil];
     [self setLocationField:nil];
     [self setCurrentLocationSwitch:nil];
+    [self setDateLabel:nil];
+    [self setReminderTextView:nil];
+    [self setDateButtonView:nil];
     [super viewDidUnload];
 }
 
@@ -130,8 +139,17 @@
         [datePicker setMinimumDate:[reminder endDate]];
         [datePicker setDate:[reminder endDate]];
         [reminderField setText:[reminder text]];
+        [reminderTextView setText:[reminder text]];
     }
     locationField.enabled = NO;
+    
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"MMM dd, yyyy hh:mm a"];
+    NSString *dateString = [format stringFromDate:[NSDate date]];
+    [dateLabel setText:dateString];
+    [format release];
+    
+    reminderTextView.delegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -141,7 +159,7 @@
     [topBarView2 setFrame:CGRectMake(0, 0, topBarView2.frame.size.width, topBarView2.frame.size.height)];
     [[self view] addSubview:topBarView2];
     
-    UIImage *bottomBar = [UIImage imageNamed:@"bottom"];
+    UIImage *bottomBar = [UIImage imageNamed:@"bottomTab"];
     bottomBarView2 = [[UIImageView alloc] initWithImage:bottomBar];
     [bottomBarView2 setFrame:CGRectMake(0, 230, bottomBarView2.frame.size.width, bottomBarView2.frame.size.height)];
     [[self view] addSubview:bottomBarView2];
@@ -149,6 +167,7 @@
     [UIView animateWithDuration:.5 delay:0 options:0 animations:^{
         [bottomBarView2 setFrame:CGRectMake(bottomBarView2.frame.origin.x, 416, bottomBarView2.frame.size.width, bottomBarView2.frame.size.height)];
     } completion:^(BOOL finished){
+        [topBarView2 setHidden:YES];
     }];
     
     [UIView animateWithDuration:.5 delay:0 options:0 animations:^{
@@ -167,7 +186,6 @@
         NSLog(@"reverseGeocodeLocation:completionHandler: Completion Handler called!");
         if (error){
             NSLog(@"Geocode failed with error: %@", error);
-            [self displayError:error];
             return;
         }
         NSLog(@"Received placemarks: %@", placemarks);
@@ -188,6 +206,11 @@
        didFailWithError:(NSError *)error
 {
     NSLog(@"Could not find location: %@", error);
+    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Location Services Not Available." delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil, nil];
+    [errorAlert show];
+    [locationActivityIndicator setHidden:YES];
+    [currentLocationLabel setText:@"Location Not Found"];
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -234,6 +257,24 @@
         locationField.enabled = YES;  
 }
 
+- (IBAction)popDatePicker:(id)sender {
+    [datePicker setHidden:NO];
+    [reminderField resignFirstResponder];
+    [reminderTextView resignFirstResponder];
+}
+
+- (IBAction)textFieldDidBeginEditing:(id)sender {
+    [datePicker setHidden:YES];
+}
+
+- (IBAction)dateChanged:(id)sender {
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"MMM dd, yyyy hh:mm a"];
+    NSString *dateString = [format stringFromDate:datePicker.date];
+    [dateLabel setText:dateString];
+    [format release];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     //NSLog(@"%@ %@", NSStringFromSelector(_cmd), fetchedPlaces);
@@ -273,6 +314,7 @@
     [reminder setLongitude:longitude];
     [reminder setIsLocationBased:YES];
     [reminder setEndDate:nil];
+    [reminder setLocationString:[[fetchedPlaces objectAtIndex:[indexPath row]] name]];
     
 }
 
@@ -287,7 +329,7 @@
 - (IBAction)addReminder:(id)sender 
 {
     ReminderStore *rs = [ReminderStore defaultStore];
-    [reminder setIsLocationBased:NO];
+    //[reminder setIsLocationBased:NO];
     
     if (!isNewReminder) {        
         NSArray *allNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
@@ -298,7 +340,7 @@
             }
         }
         reminder.endDate = datePicker.date;
-        reminder.text = reminderField.text;
+        reminder.text = reminderTextView.text;
         [rs replaceReminder:reminder index:reminderIndex];
     } /*else {
         //reminder.startDate = [NSDate date];
@@ -313,7 +355,7 @@
     //[self.navigationController popViewControllerAnimated:YES];
     //[self dismissModalViewControllerAnimated:YES];
     [self dismissEditView:nil];
-    reminder.text = reminderField.text;
+    reminder.text = reminderTextView.text;
     
     if (![reminder isLocationBased]) {
         reminder.endDate = datePicker.date;
@@ -345,7 +387,6 @@
         } else {
             NSLog(@"Region monitoring is not available.");
         }
-        //reminder.endDate = [NSString stringWithFormat:@"%i", latitude];
     }
     [rs saveReminder:reminder];
 }
@@ -371,6 +412,7 @@
 
 - (IBAction)dismissEditView:(id)sender 
 {
+    [topBarView2 setHidden:NO];
     
     [UIView animateWithDuration:.5 delay:0 options:0 animations:^{
         [topBarView2 setFrame:CGRectMake(topBarView2.frame.origin.x, 0, topBarView2.frame.size.width, topBarView2.frame.size.height)];
@@ -381,9 +423,10 @@
         [UIView animateWithDuration:.5 delay:0 options:0 animations:^{
             [delegate.topBarView setFrame:CGRectMake(delegate.topBarView.frame.origin.x, -166, delegate.topBarView.frame.size.width, delegate.topBarView.frame.size.height)];
         } completion:^(BOOL finished){
+            [delegate.topBarView setHidden:YES];
         }];
         [UIView animateWithDuration:.5 delay:0 options:0 animations:^{
-            [delegate.bottomBarView setFrame:CGRectMake(delegate.bottomBarView.frame.origin.x, 432, delegate.bottomBarView.frame.size.width, delegate.bottomBarView.frame.size.height)];
+            [delegate.bottomBarView setFrame:CGRectMake(delegate.bottomBarView.frame.origin.x, 520, delegate.bottomBarView.frame.size.width, delegate.bottomBarView.frame.size.height)];
         } completion:^(BOOL finished){
         }];
     }];
@@ -395,10 +438,28 @@
 
 }
 
+/*
 - (IBAction)textFieldDidEndEditing:(UITextField *)field
 {
     [doneButton setEnabled:YES];
     [field resignFirstResponder];
+}
+*/
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range 
+ replacementText:(NSString *)text
+{
+    // Any new character added is passed in as the "text" parameter
+    if ([text isEqualToString:@"\n"]) {
+        // Be sure to test for equality using the "isEqualToString" message
+        [doneButton setEnabled:YES];
+        [textView resignFirstResponder];
+        
+        // Return FALSE so that the final '\n' character doesn't get added
+        return FALSE;
+    }
+    // For any other character return TRUE so that the text gets added to the view
+    return TRUE;
 }
 
 
@@ -412,6 +473,9 @@
     [placeSearchBar release];
     [locationField release];
     [currentLocationSwitch release];
+    [dateLabel release];
+    [reminderTextView release];
+    [dateButtonView release];
     [super dealloc];
 }
 @end
