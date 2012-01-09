@@ -55,7 +55,6 @@
 - (IBAction)timeOrLocationChanged:(id)sender;
 - (IBAction)useLocationSwitched:(id)sender;
 - (IBAction)popDatePicker:(id)sender;
-- (IBAction)textFieldDidBeginEditing:(id)sender;
 - (IBAction)dateChanged:(id)sender;
 
 

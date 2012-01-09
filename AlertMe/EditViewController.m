@@ -263,8 +263,21 @@
     [reminderTextView resignFirstResponder];
 }
 
-- (IBAction)textFieldDidBeginEditing:(id)sender {
-    [datePicker setHidden:YES];
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    //[datePicker setHidden:YES];
+    CGFloat datePickerY = [datePicker center].y + 50;
+    CGPoint datePickerCenter = CGPointMake([datePicker center].x, datePickerY);
+    [UIView animateWithDuration:.3 animations:^(void){
+        [datePicker setCenter:datePickerCenter];
+    }];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    CGFloat datePickerY = [datePicker center].y - 50;
+    CGPoint datePickerCenter = CGPointMake([datePicker center].x, datePickerY);
+    [UIView animateWithDuration:.3 animations:^(void){
+        [datePicker setCenter:datePickerCenter];
+    }];
 }
 
 - (IBAction)dateChanged:(id)sender {
@@ -297,7 +310,6 @@
     
     return cell;
 }
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
