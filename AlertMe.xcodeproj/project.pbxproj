@@ -440,6 +440,7 @@
 		CE127CD6145F736A008A8EE1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(DEVELOPER_DIR)/Xcode Projects/iOS/AlertMe New/AlertMe2\"",
@@ -448,6 +449,7 @@
 				GCC_PREFIX_HEADER = "AlertMe/AlertMe-Prefix.pch";
 				INFOPLIST_FILE = "AlertMe/AlertMe-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -455,6 +457,7 @@
 		CE127CD7145F736A008A8EE1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(DEVELOPER_DIR)/Xcode Projects/iOS/AlertMe New/AlertMe2\"",
@@ -463,6 +466,7 @@
 				GCC_PREFIX_HEADER = "AlertMe/AlertMe-Prefix.pch";
 				INFOPLIST_FILE = "AlertMe/AlertMe-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

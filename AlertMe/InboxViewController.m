@@ -178,6 +178,7 @@
     [edit_vc2 setReminder:reminder];
     
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate.topBarView setHidden:NO];
     [UIView animateWithDuration:.5 delay:0 options:0 animations:^{
         [delegate.topBarView setFrame:CGRectMake(delegate.topBarView.frame.origin.x, 20, delegate.topBarView.frame.size.width, delegate.topBarView.frame.size.height)];
     } completion:^(BOOL finished){

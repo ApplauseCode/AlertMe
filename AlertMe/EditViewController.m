@@ -128,19 +128,26 @@
     }
     else
         [doneButton setEnabled:NO];
-    if(!reminder) {
-        reminder = [[Reminder alloc] init];        
-        //[reminderField becomeFirstResponder];
-        datePicker.date = [NSDate date];
-        datePicker.minimumDate = [NSDate date];
-        datePicker.maximumDate = nil;
-        
-    } else {
-        [datePicker setMinimumDate:[reminder endDate]];
-        [datePicker setDate:[reminder endDate]];
-        [reminderField setText:[reminder text]];
-        [reminderTextView setText:[reminder text]];
+    if (![reminder isLocationBased]) {
+        if(!reminder) {
+            reminder = [[Reminder alloc] init];        
+            //[reminderField becomeFirstResponder];
+            datePicker.date = [NSDate date];
+            datePicker.minimumDate = [NSDate date];
+            datePicker.maximumDate = nil;
+            
+        } else {
+            [datePicker setMinimumDate:[reminder endDate]];
+            [datePicker setDate:[reminder endDate]];
+        }
     }
+    else {
+        if(!reminder) {
+            reminder = [[Reminder alloc] init];
+        }
+    }
+    [reminderField setText:[reminder text]];
+    [reminderTextView setText:[reminder text]];
     locationField.enabled = NO;
     
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
@@ -259,6 +266,7 @@
 
 - (IBAction)popDatePicker:(id)sender {
     [datePicker setHidden:NO];
+    [doneButton setEnabled:YES];
     [reminderField resignFirstResponder];
     [reminderTextView resignFirstResponder];
 }
@@ -354,18 +362,7 @@
         reminder.endDate = datePicker.date;
         reminder.text = reminderTextView.text;
         [rs replaceReminder:reminder index:reminderIndex];
-    } /*else {
-        //reminder.startDate = [NSDate date];
-        reminder.endDate = datePicker.date;
-        reminder.text = reminderField.text;
-        [reminder setIsLocationBased:NO];
-        [reminder setLatitude:0.0];
-        [reminder setLongitude:0.0];
-        [rs saveReminder:reminder];
-    }*/
-    
-    //[self.navigationController popViewControllerAnimated:YES];
-    //[self dismissModalViewControllerAnimated:YES];
+    }
     [self dismissEditView:nil];
     reminder.text = reminderTextView.text;
     
@@ -400,7 +397,9 @@
             NSLog(@"Region monitoring is not available.");
         }
     }
-    [rs saveReminder:reminder];
+    if (isNewReminder) {
+        [rs saveReminder:reminder];
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region  {
@@ -425,6 +424,7 @@
 - (IBAction)dismissEditView:(id)sender 
 {
     [topBarView2 setHidden:NO];
+    [reminderTextView resignFirstResponder];
     
     [UIView animateWithDuration:.5 delay:0 options:0 animations:^{
         [topBarView2 setFrame:CGRectMake(topBarView2.frame.origin.x, 0, topBarView2.frame.size.width, topBarView2.frame.size.height)];
