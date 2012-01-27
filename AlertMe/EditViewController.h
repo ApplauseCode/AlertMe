@@ -10,19 +10,18 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import <Addressbook/Addressbook.h>
-#import <SimpleGeo/SimpleGeo.h>
-#import "SGController.h"
+#import <FactualSDK/FactualAPI.h>
 
 @class Reminder;
 
-@interface EditViewController : UIViewController <CLLocationManagerDelegate, UIScrollViewDelegate, UITextViewDelegate>
+@interface EditViewController : UIViewController <CLLocationManagerDelegate, UIScrollViewDelegate, UITextViewDelegate, FactualAPIDelegate>
 {
-    SGController *simpleGeoController;
     NSString *street;
     NSString *city;
     NSString *zipCode;
     NSString *address;
     NSString *locationString;
+    FactualAPI *apiObject;
     
 }
 
@@ -32,9 +31,9 @@
 @property (assign, nonatomic) double longitude;
 @property (assign, nonatomic) double latitude;
 @property (nonatomic, retain) NSArray *fetchedPlaces;
+@property (nonatomic, assign) CLLocationCoordinate2D currentLocation;
 
 @property (retain, nonatomic) IBOutlet UIDatePicker *datePicker;
-@property (retain, nonatomic) IBOutlet UITextField *reminderField;
 @property (retain, nonatomic) IBOutlet UITextView *reminderTextView;
 @property (retain, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (retain, nonatomic) IBOutlet UIView *locationView;
@@ -51,7 +50,6 @@
 
 - (IBAction)addReminder:(id)sender;
 - (IBAction)dismissEditView:(id)sender;
-- (IBAction)textFieldDidEndEditing:(UITextField *)field;
 - (IBAction)timeOrLocationChanged:(id)sender;
 - (IBAction)useLocationSwitched:(id)sender;
 - (IBAction)popDatePicker:(id)sender;

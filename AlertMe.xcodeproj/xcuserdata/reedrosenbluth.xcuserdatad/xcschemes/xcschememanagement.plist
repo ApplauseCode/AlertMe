@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>Inkwell.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>9D6A689614CCD07200697CA9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>CE127CBC145F736A008A8EE1</key>
 		<dict>
 			<key>primary</key>

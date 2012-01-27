@@ -11,7 +11,7 @@
 @implementation MyToolbar
 
 - (void)drawRect:(CGRect)rect {
-    UIImage *backgroundImage = [UIImage imageNamed:@"AlertMeCustomNavBar2"];
+    UIImage *backgroundImage = [UIImage imageNamed:@"AlertMeCustomNavBar4"];
     [backgroundImage drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
 }
 

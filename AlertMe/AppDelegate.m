@@ -44,7 +44,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque];
-    UIImage *plusButtonImage=[UIImage imageNamed:@"PlusButton3.png"]; //don't forget the non-retina image
+    UIImage *plusButtonImage=[UIImage imageNamed:@"PlusButton2.png"]; //don't forget the non-retina image
     UIButton *plusButton = [UIButton buttonWithType:UIButtonTypeCustom];
     plusButton.bounds = CGRectMake( 0, 0, plusButtonImage.size.width, plusButtonImage.size.height );    
     [plusButton setBackgroundImage:plusButtonImage forState:UIControlStateNormal];
@@ -56,25 +56,25 @@
     inbox_vc = [[InboxViewController alloc] init];
     [[inbox_vc navigationItem] setRightBarButtonItem: plusButtonItem];
 // **** Temporary
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoDark];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoLight];
     [button addTarget:self action:@selector(showLocation) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *loc = [[UIBarButtonItem alloc] initWithCustomView:button];
     [[inbox_vc navigationItem] setLeftBarButtonItem:loc];
 // ****
 
     nav = [[UINavigationController alloc] initWithRootViewController:inbox_vc];
-    UIImage *customNavBarImage = [UIImage imageNamed:@"AlertMeCustomNavBar2"];
+    UIImage *customNavBarImage = [UIImage imageNamed:@"AlertMeCustomNavBar4"];
     [[UINavigationBar appearance] setBackgroundImage:customNavBarImage forBarMetrics:UIBarMetricsDefault];
     UIColor *graniteColor = [UIColor colorWithRed:.60 green:.15 blue:.15 alpha:1];
     [[UINavigationBar appearance] setTintColor:graniteColor];
     
-    UIImage *topBar = [UIImage imageNamed:@"top"];
+    UIImage *topBar = [UIImage imageNamed:@"topb"];
     topBarView = [[UIImageView alloc] initWithImage:topBar];
     [topBarView setFrame:CGRectMake(0, -166, topBarView.frame.size.width, topBarView.frame.size.height)];
     [[nav view] addSubview:topBarView];
     [topBarView setHidden:YES];
     
-    UIImage *bottomBar = [UIImage imageNamed:@"bottomTab"];
+    UIImage *bottomBar = [UIImage imageNamed:@"bottomTabb"];
     bottomBarView = [[UIImageView alloc] initWithImage:bottomBar];
     [bottomBarView setFrame:CGRectMake(0, 520, bottomBarView.frame.size.width, bottomBarView.frame.size.height)];
     [[nav view] addSubview:bottomBarView];

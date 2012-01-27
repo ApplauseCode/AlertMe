@@ -27,7 +27,6 @@
 @synthesize reminder;
 @synthesize reminderIndex;
 @synthesize datePicker;
-@synthesize reminderField;
 @synthesize reminderTextView;
 @synthesize doneButton;
 @synthesize locationView;
@@ -47,13 +46,14 @@
 @synthesize fetchedPlaces;
 @synthesize topBarView2;
 @synthesize bottomBarView2;
+@synthesize currentLocation;
 
 
 - (id) init
 {
     self = [super initWithNibName:@"EditViewController" bundle:nil];
     if (self) {
-        simpleGeoController = [[SGController alloc] init];
+
     }
     return self;
 
@@ -101,12 +101,12 @@
     [locationView  setHidden:YES];
     [locationView setFrame:CGRectMake(0, 96, 320, 150)];
     [[self view] addSubview:locationView];
+    apiObject = [[FactualAPI alloc] initWithAPIKey:@"StOUMfxOlEXf4zEHwFACUAFVAPnKHNc8itqyuGOsMMTK9NDFfVwujzTeIOzlAsCT"];
 }
 
 - (void)viewDidUnload
 {
     [self setDatePicker:nil];
-    [self setReminderField:nil];
     [self setDoneButton:nil];
     [self setLocationView:nil];
     [self setCurrentLocationLabel:nil];
@@ -131,7 +131,6 @@
     if (![reminder isLocationBased]) {
         if(!reminder) {
             reminder = [[Reminder alloc] init];        
-            //[reminderField becomeFirstResponder];
             datePicker.date = [NSDate date];
             datePicker.minimumDate = [NSDate date];
             datePicker.maximumDate = nil;
@@ -146,7 +145,6 @@
             reminder = [[Reminder alloc] init];
         }
     }
-    [reminderField setText:[reminder text]];
     [reminderTextView setText:[reminder text]];
     locationField.enabled = NO;
     
@@ -161,12 +159,12 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    UIImage *topBar = [UIImage imageNamed:@"top"];
+    UIImage *topBar = [UIImage imageNamed:@"topb"];
     topBarView2 = [[UIImageView alloc] initWithImage:topBar];
     [topBarView2 setFrame:CGRectMake(0, 0, topBarView2.frame.size.width, topBarView2.frame.size.height)];
     [[self view] addSubview:topBarView2];
     
-    UIImage *bottomBar = [UIImage imageNamed:@"bottomTab"];
+    UIImage *bottomBar = [UIImage imageNamed:@"bottomTabb"];
     bottomBarView2 = [[UIImageView alloc] initWithImage:bottomBar];
     [bottomBarView2 setFrame:CGRectMake(0, 230, bottomBarView2.frame.size.width, bottomBarView2.frame.size.height)];
     [[self view] addSubview:bottomBarView2];
@@ -203,6 +201,8 @@
         street = topResult.subThoroughfare;
         zipCode = topResult.postalCode;
         
+        currentLocation = newLocation.coordinate;
+        
         [currentLocationLabel setText:city];
         [locationActivityIndicator setHidden:YES];
         [locationManager stopUpdatingLocation];
@@ -234,7 +234,7 @@
     else {
         address = locationField.text;
     }
-    SGPlacesQuery *query = [SGPlacesQuery queryWithAddress:address];
+    /*SGPlacesQuery *query = [SGPlacesQuery queryWithAddress:address];
     [query setSearchString:placeSearchBar.text];
     [query setRadius:20.0];
     [query setLimit:20];
@@ -252,7 +252,48 @@
                                                    } 
                                                                           failureBlock:^(NSError *error) {
                                                                               NSLog(@"SimpleGeo failed to retrieve places");
-                                                                          }]];
+                                                                          }]];*/
+    
+    // alloc query object
+    
+    FactualQuery* queryObject = [FactualQuery query];
+    
+    CLLocationCoordinate2D fakeCoordinate;
+    fakeCoordinate.latitude  =   40.861956;
+    fakeCoordinate.longitude = -73.714966;
+    
+    // set geo filter
+    [queryObject setGeoFilter:currentLocation radiusInMeters:8000.00];
+    
+    // set full text term
+    [queryObject addFullTextQueryTerm:placeSearchBar.text];
+    
+    // create individual row filters
+    //FactualRowFilter* postcodeFilter = [FactualRowFilter fieldName:@"postcode" beginsWith:zipCode];
+    //FactualRowFilter* telephoneFilter = [FactualRowFilter fieldName:@"telephone" beginsWith:@"(310)"];
+    //FactualRowFilter *nameFilter = [FactualRowFilter fieldName:@"name" In:<#(id), ...#>, nil
+    
+    // add them to the query object using an AND predicate
+    //[queryObject addRowFilter: [FactualRowFilter andFilter:postcodeFilter,nil]];
+    
+    queryObject.limit = 20;
+
+    // run query against the US-POI table
+    [[apiObject queryTable:@"bi0eJZ" optionalQueryParams:queryObject withDelegate:self] retain];
+    
+    NSLog(@"this happened");
+}
+
+- (void)requestComplete:(FactualAPIRequest*) request receivedQueryResult:(FactualQueryResult*) queryResult; {
+    NSLog(@"2nd thing happened");
+    //NSLog(@"queryResult          : %@",  queryResult);
+    //NSLog(@"Number of query results %f: ", queryResult.rows);
+    //NSLog(@"row index 1: %@", [[[queryResult.rows objectAtIndex:0] objectAtIndex:1] floatValue]);
+    //NSLog(@"First Column: %@",[queryResult.rows objectAtIndex:1]);
+    //NSLog(@"%f",[[[queryResult.rows objectAtIndex:1] valueForName:@"latitude"] floatValue]);
+    self.fetchedPlaces = queryResult.rows;
+    //NSLog(@"%@", fetchedPlaces);
+    [[searchDisplayController searchResultsTableView] reloadData];
 }
 
 - (IBAction)useLocationSwitched:(id)sender {
@@ -267,7 +308,6 @@
 - (IBAction)popDatePicker:(id)sender {
     [datePicker setHidden:NO];
     [doneButton setEnabled:YES];
-    [reminderField resignFirstResponder];
     [reminderTextView resignFirstResponder];
 }
 
@@ -312,9 +352,10 @@
             if ([oneObject isKindOfClass:[PlaceCell class]]) 
                 cell = (PlaceCell *)oneObject;
     }
-    [[cell placeLabel] setText:[[fetchedPlaces objectAtIndex:[indexPath row]] name]];
+    [[cell placeLabel] setText:[[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"name"]];
+    //NSLog(@"%@",[[fetchedPlaces objectAtIndex:1] valueForName:@"name"]);
     //[[cell detailTextLabel] setText:[(SGAddress *)[[fetchedPlaces objectAtIndex:[indexPath row]] address] street]];
-    [[cell addressLabel] setText:[(SGAddress *)[[fetchedPlaces objectAtIndex:[indexPath row]] address] street]];
+    [[cell addressLabel] setText:[[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"address"]];
     
     return cell;
 }
@@ -322,10 +363,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [doneButton setEnabled:YES];
-    NSLog(@"%@", [[fetchedPlaces objectAtIndex:[indexPath row]] point]);
     
-    latitude = [[[fetchedPlaces objectAtIndex:[indexPath row]] point] latitude];
-    longitude = [[[fetchedPlaces objectAtIndex:[indexPath row]] point] longitude];
+    latitude = [[[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"latitude"] floatValue];
+    longitude = [[[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"longitude"] floatValue];
     
     NSLog(@"%f", latitude);
     NSLog(@"%f", longitude);
@@ -334,7 +374,7 @@
     [reminder setLongitude:longitude];
     [reminder setIsLocationBased:YES];
     [reminder setEndDate:nil];
-    [reminder setLocationString:[[fetchedPlaces objectAtIndex:[indexPath row]] name]];
+    [reminder setLocationString:[[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"name"]];
     
 }
 
@@ -349,17 +389,23 @@
 - (IBAction)addReminder:(id)sender 
 {
     ReminderStore *rs = [ReminderStore defaultStore];
-    //[reminder setIsLocationBased:NO];
     
     if (!isNewReminder) {        
         NSArray *allNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
-        for (UILocalNotification *notification in allNotifications) {
-            if (([reminder.text isEqual:notification.alertBody]) && ([reminder.endDate isEqual:notification.fireDate])) {
-                [[UIApplication sharedApplication] cancelLocalNotification:notification];
-                NSLog(@"found notification to delete %@", reminder.text);
+        if (![reminder isLocationBased]) {
+            for (UILocalNotification *notification in allNotifications) {
+                if (([reminder.text isEqual:notification.alertBody]) && ([reminder.endDate isEqual:notification.fireDate])) {
+                    [[UIApplication sharedApplication] cancelLocalNotification:notification];
+                    NSLog(@"found notification to delete %@", reminder.text);
+                }
             }
+            reminder.endDate = datePicker.date;
         }
-        reminder.endDate = datePicker.date;
+        else {
+            NSLog(@"isLocationBased %i", [reminder isLocationBased]);
+            [locationManager stopMonitoringForRegion:[reminder aRegion]];
+            
+        }
         reminder.text = reminderTextView.text;
         [rs replaceReminder:reminder index:reminderIndex];
     }
@@ -415,10 +461,6 @@
     [localNotif release];
     
     NSLog(@"YAY! Teleporation successful");
-    
-    //[locationAlert show];
-    //[locationAlert release];
-    
 }
 
 - (IBAction)dismissEditView:(id)sender 
@@ -477,7 +519,6 @@
 
 - (void)dealloc {
     [datePicker release];
-    [reminderField release];
     [doneButton release];
     [locationView release];
     [currentLocationLabel release];
