@@ -47,6 +47,7 @@
 @property (retain, nonatomic) IBOutlet UISwitch *currentLocationSwitch;
 @property (retain, nonatomic) IBOutlet UILabel *dateLabel;
 @property (retain, nonatomic) IBOutlet UIView *dateButtonView;
+@property (retain, nonatomic) IBOutlet UITableView *favoriteTableView;
 
 - (IBAction)addReminder:(id)sender;
 - (IBAction)dismissEditView:(id)sender;
@@ -54,6 +55,5 @@
 - (IBAction)useLocationSwitched:(id)sender;
 - (IBAction)popDatePicker:(id)sender;
 - (IBAction)dateChanged:(id)sender;
-
 
 @end

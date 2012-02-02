@@ -18,6 +18,8 @@
 @property (nonatomic, retain) UILocalNotification *reminderNotification;
 @property (nonatomic, retain) UIImageView *topBarView2;
 @property (nonatomic, retain) UIImageView *bottomBarView2;
+@property (nonatomic, retain) NSMutableArray *favorites;
+@property (retain) NSIndexPath *lastIndexPath;
 
 @end
 
@@ -40,6 +42,7 @@
 @synthesize currentLocationSwitch;
 @synthesize dateLabel;
 @synthesize dateButtonView;
+@synthesize favoriteTableView;
 @synthesize segmentedControl;
 @synthesize latitude;
 @synthesize longitude;
@@ -47,13 +50,16 @@
 @synthesize topBarView2;
 @synthesize bottomBarView2;
 @synthesize currentLocation;
+@synthesize favorites;
+@synthesize lastIndexPath;
 
 
 - (id) init
 {
     self = [super initWithNibName:@"EditViewController" bundle:nil];
     if (self) {
-
+        favorites = [[NSMutableArray alloc] initWithCapacity:1];
+        [favorites addObject:@"Salvatore's"];
     }
     return self;
 
@@ -99,7 +105,7 @@
 {
     [super viewDidLoad];
     [locationView  setHidden:YES];
-    [locationView setFrame:CGRectMake(0, 96, 320, 150)];
+    [locationView setFrame:CGRectMake(0, 96, 320, 366)];
     [[self view] addSubview:locationView];
     apiObject = [[FactualAPI alloc] initWithAPIKey:@"StOUMfxOlEXf4zEHwFACUAFVAPnKHNc8itqyuGOsMMTK9NDFfVwujzTeIOzlAsCT"];
 }
@@ -117,6 +123,7 @@
     [self setDateLabel:nil];
     [self setReminderTextView:nil];
     [self setDateButtonView:nil];
+    [self setFavoriteTableView:nil];
     [super viewDidUnload];
 }
 
@@ -338,7 +345,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //NSLog(@"%@ %@", NSStringFromSelector(_cmd), fetchedPlaces);
+    if (tableView == favoriteTableView) {
+        NSLog(@"Favorites: %i", [favorites count]);
+        return [favorites count];
+    }
+        
     return [fetchedPlaces count];
 }
 
@@ -352,17 +363,32 @@
             if ([oneObject isKindOfClass:[PlaceCell class]]) 
                 cell = (PlaceCell *)oneObject;
     }
-    [[cell placeLabel] setText:[[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"name"]];
-    //NSLog(@"%@",[[fetchedPlaces objectAtIndex:1] valueForName:@"name"]);
-    //[[cell detailTextLabel] setText:[(SGAddress *)[[fetchedPlaces objectAtIndex:[indexPath row]] address] street]];
-    [[cell addressLabel] setText:[[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"address"]];
-    
+    if (tableView == favoriteTableView) {
+        NSLog(@"I'm in favorites");
+        [[cell placeLabel] setText:[favorites objectAtIndex:[indexPath row]]];
+    }
+    else {
+        [[cell placeLabel] setText:[[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"name"]];
+        //NSLog(@"%@",[[fetchedPlaces objectAtIndex:1] valueForName:@"name"]);
+        //[[cell detailTextLabel] setText:[(SGAddress *)[[fetchedPlaces objectAtIndex:[indexPath row]] address] street]];
+        [[cell addressLabel] setText:[[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"address"]];
+    }
+    if ([indexPath compare:self.lastIndexPath] == NSOrderedSame) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } 
+    else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     return cell;
+    
 }
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [doneButton setEnabled:YES];
+    
+    self.lastIndexPath = indexPath;
     
     latitude = [[[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"latitude"] floatValue];
     longitude = [[[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"longitude"] floatValue];
@@ -375,6 +401,8 @@
     [reminder setIsLocationBased:YES];
     [reminder setEndDate:nil];
     [reminder setLocationString:[[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"name"]];
+    
+    [tableView reloadData];
     
 }
 
@@ -467,6 +495,8 @@
 {
     [topBarView2 setHidden:NO];
     [reminderTextView resignFirstResponder];
+    [placeSearchBar resignFirstResponder];
+    [searchDisplayController setActive:FALSE animated:TRUE];
     
     [UIView animateWithDuration:.5 delay:0 options:0 animations:^{
         [topBarView2 setFrame:CGRectMake(topBarView2.frame.origin.x, 0, topBarView2.frame.size.width, topBarView2.frame.size.height)];
@@ -529,6 +559,7 @@
     [dateLabel release];
     [reminderTextView release];
     [dateButtonView release];
+    [favoriteTableView release];
     [super dealloc];
 }
 @end
