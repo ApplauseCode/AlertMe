@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D00A2A614DB44B000C79D06 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D00A2A514DB44B000C79D06 /* Place.m */; };
 		9D164E6014C8585300627162 /* topb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D164E5F14C8585300627162 /* topb@2x.png */; };
 		9D242B5C14ACFD30007E87E1 /* cellBG2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D242B5B14ACFD30007E87E1 /* cellBG2.png */; };
 		9D242B5E14ACFF31007E87E1 /* cellBGP.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D242B5D14ACFF31007E87E1 /* cellBGP.png */; };
@@ -60,6 +61,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9D00A2A414DB44B000C79D06 /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
+		9D00A2A514DB44B000C79D06 /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Place.m; sourceTree = "<group>"; };
 		9D164E5F14C8585300627162 /* topb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topb@2x.png"; sourceTree = "<group>"; };
 		9D242B5B14ACFD30007E87E1 /* cellBG2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellBG2.png; sourceTree = "<group>"; };
 		9D242B5D14ACFF31007E87E1 /* cellBGP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellBGP.png; sourceTree = "<group>"; };
@@ -296,6 +299,8 @@
 				CE127CF1145F7B5C008A8EE1 /* ReminderStore.m */,
 				CE127CF2145F7B5C008A8EE1 /* Reminder.h */,
 				CE127CF3145F7B5C008A8EE1 /* Reminder.m */,
+				9D00A2A414DB44B000C79D06 /* Place.h */,
+				9D00A2A514DB44B000C79D06 /* Place.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -411,6 +416,7 @@
 				9D8BE50F148422CA00F03A66 /* PlaceCell.m in Sources */,
 				9DC3948A14B3C61E0047FA90 /* UIPlaceHolderTextView.m in Sources */,
 				9DC3949714B3FBDC0047FA90 /* MyToolBar.m in Sources */,
+				9D00A2A614DB44B000C79D06 /* Place.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

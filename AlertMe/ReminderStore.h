@@ -14,16 +14,15 @@
 {
     NSMutableArray *allReminders;
 }
+@property (nonatomic, retain) NSMutableArray *allReminders;
+@property (nonatomic, retain) NSMutableArray *favoritePlaces;
 
-// Class methods are prefixed with a + instead of a -
 + (ReminderStore *)defaultStore;
 
 - (void)removeReminder:(Reminder *)r;
-- (NSMutableArray *)allReminders;
 - (void)saveReminder:(Reminder *)r;
 - (void)replaceReminder:(Reminder *)r index:(int)i;
-- (NSString *)reminderArchivePath;
-- (void)fetchRemindersIfNecessary;
+
 - (BOOL)saveChanges;
 
 @end

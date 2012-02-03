@@ -39,7 +39,7 @@
         [self setEndDate:[decoder decodeObjectForKey:@"endDate"]];
         [self setIsLocationBased:[decoder decodeBoolForKey:@"isLocationBased"]];
         [self setLatitude:[decoder decodeDoubleForKey:@"latitude"]];
-        [self setLatitude:[decoder decodeDoubleForKey:@"longitude"]];
+        [self setLongitude:[decoder decodeDoubleForKey:@"longitude"]];
         [self setLocationString:[decoder decodeObjectForKey:@"locationString"]];
         [self setARegion:[decoder decodeObjectForKey:@"aRegion"]];
     }
