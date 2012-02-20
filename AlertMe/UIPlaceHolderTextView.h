@@ -21,6 +21,6 @@
 @property (nonatomic, retain) NSString *placeholder;
 @property (nonatomic, retain) UIColor *placeholderColor;
 
--(void)textChanged:(NSNotification*)notification;
+-(void)textChanged:(NSNotification *)notification;
 
 @end

@@ -104,8 +104,10 @@
         [noReminderView removeFromSuperview];
         [self.tableView setScrollEnabled:YES];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-        tableView.separatorColor = [UIColor lightGrayColor];
-        [[self tableView] setBackgroundView:bgView];
+        tableView.separatorColor = [UIColor darkGrayColor];
+        //[[self tableView] setBackgroundView:bgView];
+        [[self tableView] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"linen.png"]]];
+        //[[self tableView] setBackgroundColor:[UIColor viewFlipsideBackgroundColor]];
     }
     return [[rs allReminders] count];
 }
@@ -128,8 +130,17 @@
     else {
     cell.detailLabel.text = [[[rs allReminders] objectAtIndex:[indexPath row]] timeToExpiration];
     }
-    cell.contentView.backgroundColor = [UIColor whiteColor];
+    
+    static UIImage *bgPressed;
+    bgPressed = [UIImage imageNamed:@"cellBG4.png"];
+    UIImageView *bgPressedImageView = [[UIImageView alloc] initWithImage:bgPressed];
+    [cell setSelectedBackgroundView:bgPressedImageView];
+    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [[cell contentView] setBackgroundColor:[UIColor clearColor]];
 }
 
 

@@ -32,6 +32,7 @@
 @property (assign, nonatomic) double latitude;
 @property (nonatomic, retain) NSArray *fetchedPlaces;
 @property (nonatomic, assign) CLLocationCoordinate2D currentLocation;
+@property (retain, nonatomic) NSMutableSet *factualSet;
 
 @property (retain, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (retain, nonatomic) IBOutlet UITextView *reminderTextView;
@@ -55,5 +56,8 @@
 - (IBAction)useLocationSwitched:(id)sender;
 - (IBAction)popDatePicker:(id)sender;
 - (IBAction)dateChanged:(id)sender;
+
+- (void)buttonPressed:(id)sender;
+- (void)createFactualSet;
 
 @end

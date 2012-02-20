@@ -73,7 +73,7 @@
 {
     [encoder encodeObject:text forKey:@"text"];
     [encoder encodeObject:endDate forKey:@"endDate"];
-    [encoder encodeBool:isLocationBased forKey:@"isLoactionBased"];
+    [encoder encodeBool:isLocationBased forKey:@"isLocationBased"];
     [encoder encodeDouble:latitude forKey:@"latitude"];
     [encoder encodeDouble:longitude forKey:@"longitude"];
     [encoder encodeObject:locationString forKey:@"locationString"];

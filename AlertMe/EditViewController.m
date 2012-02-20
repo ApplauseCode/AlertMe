@@ -12,6 +12,7 @@
 #import "TempViewController.h"
 #import "PlaceCell.h"
 #import "AppDelegate.h"
+#import "Place.h"
 
 @interface EditViewController()
 
@@ -52,6 +53,7 @@
 @synthesize currentLocation;
 @synthesize favorites;
 @synthesize lastIndexPath;
+@synthesize factualSet;
 
 
 - (id) init
@@ -59,7 +61,7 @@
     self = [super initWithNibName:@"EditViewController" bundle:nil];
     if (self) {
         favorites = [[NSMutableArray alloc] initWithCapacity:1];
-        [favorites addObject:@"Salvatore's"];
+        [self createFactualSet];
     }
     return self;
 
@@ -67,6 +69,15 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     return [self init];
+}
+
+- (void)createFactualSet
+{
+    factualSet = [[NSMutableSet alloc] init];
+    ReminderStore *rs = [ReminderStore defaultStore];
+    for (Place *p in rs.favoritePlaces) {
+        [factualSet addObject:p];
+    }
 }
 
 #pragma mark - View lifecycle
@@ -105,7 +116,7 @@
 {
     [super viewDidLoad];
     [locationView  setHidden:YES];
-    [locationView setFrame:CGRectMake(0, 96, 320, 366)];
+    [locationView setFrame:CGRectMake(0, 96, 320, 321)];
     [[self view] addSubview:locationView];
     apiObject = [[FactualAPI alloc] initWithAPIKey:@"StOUMfxOlEXf4zEHwFACUAFVAPnKHNc8itqyuGOsMMTK9NDFfVwujzTeIOzlAsCT"];
 }
@@ -195,12 +206,12 @@
     CLGeocoder *geoCoder = [[[CLGeocoder alloc] init] autorelease];
     
     [geoCoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error) {
-        NSLog(@"reverseGeocodeLocation:completionHandler: Completion Handler called!");
+        //NSLog(@"reverseGeocodeLocation:completionHandler: Completion Handler called!");
         if (error){
-            NSLog(@"Geocode failed with error: %@", error);
+            //NSLog(@"Geocode failed with error: %@", error);
             return;
         }
-        NSLog(@"Received placemarks: %@", placemarks);
+        //NSLog(@"Received placemarks: %@", placemarks);
         
         CLPlacemark *topResult = [placemarks objectAtIndex:0];
         
@@ -219,7 +230,7 @@
 - (void)locationManager:(CLLocationManager *)manager 
        didFailWithError:(NSError *)error
 {
-    NSLog(@"Could not find location: %@", error);
+    //NSLog(@"Could not find location: %@", error);
     UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Location Services Not Available." delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil, nil];
     [errorAlert show];
     [locationActivityIndicator setHidden:YES];
@@ -241,33 +252,8 @@
     else {
         address = locationField.text;
     }
-    /*SGPlacesQuery *query = [SGPlacesQuery queryWithAddress:address];
-    [query setSearchString:placeSearchBar.text];
-    [query setRadius:20.0];
-    [query setLimit:20];
-    
-    [simpleGeoController.client getPlacesForQuery:query
-                                         callback:[SGCallback callbackWithSuccessBlock:
-                                                   ^(id response) {
-                                                       // you've got Places!
-                                                       // to create an array of SGPlace objects...
-                                                       NSArray *places = [NSArray arrayWithSGCollection:response type:SGCollectionTypePlaces];
-                                                       self.fetchedPlaces = places;
-                                                       
-                                                       NSLog(@"%@",fetchedPlaces);
-                                                       [[[self searchDisplayController] searchResultsTableView] reloadData];
-                                                   } 
-                                                                          failureBlock:^(NSError *error) {
-                                                                              NSLog(@"SimpleGeo failed to retrieve places");
-                                                                          }]];*/
-    
-    // alloc query object
     
     FactualQuery* queryObject = [FactualQuery query];
-    
-    CLLocationCoordinate2D fakeCoordinate;
-    fakeCoordinate.latitude  =   40.861956;
-    fakeCoordinate.longitude = -73.714966;
     
     // set geo filter
     [queryObject setGeoFilter:currentLocation radiusInMeters:8000.00];
@@ -288,18 +274,10 @@
     // run query against the US-POI table
     [[apiObject queryTable:@"bi0eJZ" optionalQueryParams:queryObject withDelegate:self] retain];
     
-    NSLog(@"this happened");
 }
 
 - (void)requestComplete:(FactualAPIRequest*) request receivedQueryResult:(FactualQueryResult*) queryResult; {
-    NSLog(@"2nd thing happened");
-    //NSLog(@"queryResult          : %@",  queryResult);
-    //NSLog(@"Number of query results %f: ", queryResult.rows);
-    //NSLog(@"row index 1: %@", [[[queryResult.rows objectAtIndex:0] objectAtIndex:1] floatValue]);
-    //NSLog(@"First Column: %@",[queryResult.rows objectAtIndex:1]);
-    //NSLog(@"%f",[[[queryResult.rows objectAtIndex:1] valueForName:@"latitude"] floatValue]);
     self.fetchedPlaces = queryResult.rows;
-    //NSLog(@"%@", fetchedPlaces);
     [[searchDisplayController searchResultsTableView] reloadData];
 }
 
@@ -319,7 +297,6 @@
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    //[datePicker setHidden:YES];
     CGFloat datePickerY = [datePicker center].y + 50;
     CGPoint datePickerCenter = CGPointMake([datePicker center].x, datePickerY);
     [UIView animateWithDuration:.3 animations:^(void){
@@ -346,8 +323,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == favoriteTableView) {
-        NSLog(@"Favorites: %i", [favorites count]);
-        return [favorites count];
+        ReminderStore *rs = [ReminderStore defaultStore];
+        //NSLog(@"Favorites: %i", [rs.favoritePlaces count]);
+        return [rs.favoritePlaces count];
     }
         
     return [fetchedPlaces count];
@@ -362,16 +340,25 @@
         for (id oneObject in nib) 
             if ([oneObject isKindOfClass:[PlaceCell class]]) 
                 cell = (PlaceCell *)oneObject;
+        [[cell starButton] addTarget:self
+                           action:@selector(buttonPressed:)
+                 forControlEvents:UIControlEventTouchUpInside];
     }
     if (tableView == favoriteTableView) {
-        NSLog(@"I'm in favorites");
-        [[cell placeLabel] setText:[favorites objectAtIndex:[indexPath row]]];
+        ReminderStore *rs = [ReminderStore defaultStore];
+        cell.placeLabel.text = [[[rs favoritePlaces] objectAtIndex:[indexPath row]] name];
+        cell.addressLabel.text = [[[rs favoritePlaces] objectAtIndex:[indexPath row]] address];
+        [[cell starButton] setHighlighted:YES];
     }
     else {
         [[cell placeLabel] setText:[[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"name"]];
-        //NSLog(@"%@",[[fetchedPlaces objectAtIndex:1] valueForName:@"name"]);
-        //[[cell detailTextLabel] setText:[(SGAddress *)[[fetchedPlaces objectAtIndex:[indexPath row]] address] street]];
         [[cell addressLabel] setText:[[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"address"]];
+        NSString *fID = [[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"factual_id"];
+        Place *p = [[Place alloc] init];
+        [p setFactualID:fID];
+        if ([factualSet containsObject:p]) {
+            [[cell starButton] setHighlighted:YES];
+        }
     }
     if ([indexPath compare:self.lastIndexPath] == NSOrderedSame) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -379,7 +366,39 @@
     else {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
+    
+    [[cell starButton] setTag:[indexPath row]];
     return cell;
+    
+}
+
+- (void)buttonPressed:(id)sender
+{
+    int rowOfButton = [sender tag];
+    ReminderStore *rs = [ReminderStore defaultStore];
+    Place *newFavorite = [[Place alloc] init];
+    [newFavorite setName:[[fetchedPlaces objectAtIndex:rowOfButton] valueForName:@"name"]];
+    [newFavorite setAddress:[[fetchedPlaces objectAtIndex:rowOfButton] valueForName:@"address"]];
+    [newFavorite setLatitude:[[[fetchedPlaces objectAtIndex:rowOfButton] valueForName:@"latitude"] floatValue]];
+    [newFavorite setLongitude:[[[fetchedPlaces objectAtIndex:rowOfButton] valueForName:@"longitude"] floatValue]];
+    [newFavorite setFactualID:[[fetchedPlaces objectAtIndex:rowOfButton] valueForName:@"factual_id"]];
+    Place *selectedFavorite;
+    if ([[rs favoritePlaces] count] > rowOfButton) {
+        selectedFavorite = [[rs favoritePlaces] objectAtIndex:rowOfButton];
+    }
+    if ([factualSet containsObject:newFavorite]) {
+        [rs.favoritePlaces removeObject:newFavorite];
+    }
+    else if ([factualSet containsObject:selectedFavorite]) {
+        [rs.favoritePlaces removeObject:selectedFavorite];
+    }
+    else {
+        [rs.favoritePlaces addObject:newFavorite];
+    }
+    
+    [self createFactualSet];
+    [[searchDisplayController searchResultsTableView] reloadData];
+    [favoriteTableView reloadData];
     
 }
 
@@ -388,19 +407,25 @@
 {
     [doneButton setEnabled:YES];
     
+    ReminderStore *rs = [ReminderStore defaultStore];
+    
     self.lastIndexPath = indexPath;
     
-    latitude = [[[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"latitude"] floatValue];
-    longitude = [[[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"longitude"] floatValue];
-    
-    NSLog(@"%f", latitude);
-    NSLog(@"%f", longitude);
+    if (tableView == favoriteTableView) {
+        latitude = [[[rs favoritePlaces] objectAtIndex:[indexPath row]] latitude];
+        longitude = [[[rs favoritePlaces] objectAtIndex:[indexPath row]] longitude];
+        [reminder setLocationString:[[[rs favoritePlaces] objectAtIndex:[indexPath row]] name]];
+    }
+    else {
+        latitude = [[[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"latitude"] floatValue];
+        longitude = [[[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"longitude"] floatValue];
+        [reminder setLocationString:[[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"name"]];
+    }
     
     [reminder setLatitude:latitude];
     [reminder setLongitude:longitude];
     [reminder setIsLocationBased:YES];
     [reminder setEndDate:nil];
-    [reminder setLocationString:[[fetchedPlaces objectAtIndex:[indexPath row]] valueForName:@"name"]];
     
     [tableView reloadData];
     
@@ -424,13 +449,11 @@
             for (UILocalNotification *notification in allNotifications) {
                 if (([reminder.text isEqual:notification.alertBody]) && ([reminder.endDate isEqual:notification.fireDate])) {
                     [[UIApplication sharedApplication] cancelLocalNotification:notification];
-                    NSLog(@"found notification to delete %@", reminder.text);
                 }
             }
             reminder.endDate = datePicker.date;
         }
         else {
-            NSLog(@"isLocationBased %i", [reminder isLocationBased]);
             [locationManager stopMonitoringForRegion:[reminder aRegion]];
             
         }
@@ -449,7 +472,6 @@
         reminderNotification.alertAction = @"View";
         reminderNotification.soundName = UILocalNotificationDefaultSoundName;
         reminderNotification.applicationIconBadgeNumber = -1;
-        NSLog(@"notification registered");
     
         [reminder setLatitude:0.0];
         [reminder setLongitude:0.0];
@@ -468,7 +490,7 @@
             [reminder setARegion:newRegion];
             [newRegion release];
         } else {
-            NSLog(@"Region monitoring is not available.");
+            //NSLog(@"Region monitoring is not available.");
         }
     }
     if (isNewReminder) {
@@ -487,8 +509,6 @@
     localNotif.applicationIconBadgeNumber = -1;
     [[UIApplication sharedApplication] presentLocalNotificationNow:localNotif];
     [localNotif release];
-    
-    NSLog(@"YAY! Teleporation successful");
 }
 
 - (IBAction)dismissEditView:(id)sender 

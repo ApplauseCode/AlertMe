@@ -14,6 +14,7 @@
 @synthesize longitude;
 @synthesize latitude;
 @synthesize address;
+@synthesize factualID;
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
@@ -26,6 +27,7 @@
         [self setAddress:[decoder decodeObjectForKey:@"address"]];
         [self setLatitude:[decoder decodeDoubleForKey:@"latitude"]];
         [self setLongitude:[decoder decodeDoubleForKey:@"longitude"]];
+        [self setFactualID:[decoder decodeObjectForKey:@"factualID"]];
     }
     return self;
 }
@@ -36,6 +38,17 @@
     [encoder encodeObject:address forKey:@"address"];
     [encoder encodeDouble:latitude forKey:@"latitude"];
     [encoder encodeDouble:longitude forKey:@"longitude"];
+    [encoder encodeObject:factualID forKey:@"factualID"];
+}
+
+- (BOOL)isEqual:(id)object
+{
+    return [[self factualID] isEqualToString:[object factualID]];
+}
+
+- (NSUInteger)hash
+{
+    return [[self factualID] hash];
 }
 
 

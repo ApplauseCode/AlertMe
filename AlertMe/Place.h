@@ -14,5 +14,6 @@
 @property (nonatomic, assign) double longitude;
 @property (nonatomic, assign) double latitude;
 @property (nonatomic, copy) NSString *address;
+@property (nonatomic, copy) NSString *factualID;
 
 @end

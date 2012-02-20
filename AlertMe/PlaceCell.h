@@ -19,4 +19,5 @@
 @property (nonatomic, retain) IBOutlet UILabel *addressLabel;
 @property (nonatomic, retain) IBOutlet UIButton *starButton;
 
+
 @end
