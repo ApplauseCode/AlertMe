@@ -21,6 +21,7 @@
 @property (nonatomic, retain) UIImageView *bottomBarView2;
 @property (nonatomic, retain) NSMutableArray *favorites;
 @property (retain) NSIndexPath *lastIndexPath;
+@property (nonatomic) BOOL isSearchTable;
 
 @end
 
@@ -54,6 +55,8 @@
 @synthesize favorites;
 @synthesize lastIndexPath;
 @synthesize factualSet;
+@synthesize isSearchTable;
+@synthesize segImage;
 
 
 - (id) init
@@ -62,6 +65,7 @@
     if (self) {
         favorites = [[NSMutableArray alloc] initWithCapacity:1];
         [self createFactualSet];
+        [self setIsSearchTable:NO];
     }
     return self;
 
@@ -83,10 +87,10 @@
 #pragma mark - View lifecycle
 - (IBAction)timeOrLocationChanged:(id)sender 
 {
-    [locationView setHidden:![sender selectedSegmentIndex]];
-    [dateButtonView setHidden:[sender selectedSegmentIndex]];
-    [datePicker setHidden:[sender selectedSegmentIndex]];
-   // [locationField enabled: [sender selectedSegmentIndex]];
+    //[locationView setHidden:![sender selectedSegmentIndex]];
+    //[dateButtonView setHidden:[sender selectedSegmentIndex]];
+    //[datePicker setHidden:[sender selectedSegmentIndex]];
+    //[locationField enabled: [sender selectedSegmentIndex]];
     
     if ([segmentedControl selectedSegmentIndex]) {
         
@@ -105,6 +109,46 @@
         // Tell our manager to start looking for its location immediately
         [locationManager startUpdatingLocation];
         
+        [segImage setImage:[UIImage imageNamed:@"AlertMeBottomBarR.png"]];
+        
+        CGFloat datePickerX = [datePicker center].x - 320;
+        CGPoint datePickerCenter = CGPointMake(datePickerX, [datePicker center].y);
+        [UIView animateWithDuration:.3 animations:^(void){
+            [datePicker setCenter:datePickerCenter];
+        }];
+        
+        CGFloat dateButtonViewX = [dateButtonView center].x - 320;
+        CGPoint dateButtonViewCenter = CGPointMake(dateButtonViewX, [dateButtonView center].y);
+        [UIView animateWithDuration:.3 animations:^(void){
+            [dateButtonView setCenter:dateButtonViewCenter];
+        }];
+        
+        CGFloat lvX = [locationView center].x - 320;
+        CGPoint lvCenter = CGPointMake(lvX, [locationView center].y);
+        [UIView animateWithDuration:.3 animations:^(void){
+            [locationView setCenter:lvCenter];
+        }];
+    }
+    else {
+        [segImage setImage:[UIImage imageNamed:@"AlertMeBottomBarL3.png"]];
+        
+        CGFloat datePickerX = [datePicker center].x + 320;
+        CGPoint datePickerCenter = CGPointMake(datePickerX, [datePicker center].y);
+        [UIView animateWithDuration:.3 animations:^(void){
+            [datePicker setCenter:datePickerCenter];
+        }];
+        
+        CGFloat dateButtonViewX = [dateButtonView center].x + 320;
+        CGPoint dateButtonViewCenter = CGPointMake(dateButtonViewX, [dateButtonView center].y);
+        [UIView animateWithDuration:.3 animations:^(void){
+            [dateButtonView setCenter:dateButtonViewCenter];
+        }];
+        
+        CGFloat lvX = [locationView center].x + 320;
+        CGPoint lvCenter = CGPointMake(lvX, [locationView center].y);
+        [UIView animateWithDuration:.3 animations:^(void){
+            [locationView setCenter:lvCenter];
+        }];
     }
 
 }
@@ -115,8 +159,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [locationView  setHidden:YES];
-    [locationView setFrame:CGRectMake(0, 96, 320, 321)];
+    //[locationView  setHidden:YES];
+    [locationView setFrame:CGRectMake(320, 96, 320, 321)];
     [[self view] addSubview:locationView];
     apiObject = [[FactualAPI alloc] initWithAPIKey:@"StOUMfxOlEXf4zEHwFACUAFVAPnKHNc8itqyuGOsMMTK9NDFfVwujzTeIOzlAsCT"];
 }
@@ -186,16 +230,17 @@
     bottomBarView2 = [[UIImageView alloc] initWithImage:bottomBar];
     [bottomBarView2 setFrame:CGRectMake(0, 230, bottomBarView2.frame.size.width, bottomBarView2.frame.size.height)];
     [[self view] addSubview:bottomBarView2];
-    
+
     [UIView animateWithDuration:.5 delay:0 options:0 animations:^{
         [bottomBarView2 setFrame:CGRectMake(bottomBarView2.frame.origin.x, 416, bottomBarView2.frame.size.width, bottomBarView2.frame.size.height)];
     } completion:^(BOOL finished){
-        [topBarView2 setHidden:YES];
+        [bottomBarView2 setHidden:YES];
     }];
     
     [UIView animateWithDuration:.5 delay:0 options:0 animations:^{
         [topBarView2 setFrame:CGRectMake(topBarView2.frame.origin.x, -186, topBarView2.frame.size.width, topBarView2.frame.size.height)];
     } completion:^(BOOL finished){
+        [topBarView2 setHidden:YES];
     }];
 }
 
@@ -375,6 +420,8 @@
 - (void)buttonPressed:(id)sender
 {
     int rowOfButton = [sender tag];
+    NSIndexPath *path = [NSIndexPath indexPathForRow:rowOfButton inSection:0];
+    NSArray *rowsToDelete;
     ReminderStore *rs = [ReminderStore defaultStore];
     Place *newFavorite = [[Place alloc] init];
     [newFavorite setName:[[fetchedPlaces objectAtIndex:rowOfButton] valueForName:@"name"]];
@@ -383,22 +430,46 @@
     [newFavorite setLongitude:[[[fetchedPlaces objectAtIndex:rowOfButton] valueForName:@"longitude"] floatValue]];
     [newFavorite setFactualID:[[fetchedPlaces objectAtIndex:rowOfButton] valueForName:@"factual_id"]];
     Place *selectedFavorite;
-    if ([[rs favoritePlaces] count] > rowOfButton) {
-        selectedFavorite = [[rs favoritePlaces] objectAtIndex:rowOfButton];
-    }
-    if ([factualSet containsObject:newFavorite]) {
-        [rs.favoritePlaces removeObject:newFavorite];
-    }
-    else if ([factualSet containsObject:selectedFavorite]) {
-        [rs.favoritePlaces removeObject:selectedFavorite];
+//    if ([[rs favoritePlaces] count] > rowOfButton) {
+//        selectedFavorite = [[rs favoritePlaces] objectAtIndex:rowOfButton];
+//    }
+//    if ([factualSet containsObject:newFavorite]) {
+//        [rs.favoritePlaces removeObject:newFavorite];
+//    }
+//    else if ([factualSet containsObject:selectedFavorite]) {
+//        [rs.favoritePlaces removeObject:selectedFavorite];
+//    }
+//    else {
+//        [rs.favoritePlaces addObject:newFavorite];
+//    }
+    
+    ///
+    if ([self isSearchTable]) {
+        if ([factualSet containsObject:newFavorite]) {
+            [rs.favoritePlaces removeObject:newFavorite];
+        }
+        else {
+            [rs.favoritePlaces addObject:newFavorite];
+        }
     }
     else {
-        [rs.favoritePlaces addObject:newFavorite];
+        selectedFavorite = [[rs favoritePlaces] objectAtIndex:rowOfButton];
+        [rs.favoritePlaces removeObject:selectedFavorite];
+        rowsToDelete = [NSArray arrayWithObject:path];
+        [favoriteTableView deleteRowsAtIndexPaths:rowsToDelete withRowAnimation:UITableViewRowAnimationAutomatic];
     }
     
+    int i = 0;
+    for (PlaceCell *c in [favoriteTableView visibleCells]) {
+        [[c starButton] setTag:i];
+        i++;
+    }
+    for (PlaceCell *c in [favoriteTableView visibleCells]) {
+        NSLog(@"Tag: %i", c.starButton.tag);
+    }
     [self createFactualSet];
     [[searchDisplayController searchResultsTableView] reloadData];
-    [favoriteTableView reloadData];
+    //[favoriteTableView reloadData];
     
 }
 
@@ -436,7 +507,13 @@
 {
     // Load new info if the search term has changed
     [self loadInfoForLocation:nil];
+    [self setIsSearchTable:YES];
     [aSearchBar resignFirstResponder];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [self setIsSearchTable:NO];
+    [favoriteTableView reloadData];
 }
 
 - (IBAction)addReminder:(id)sender 
@@ -514,6 +591,7 @@
 - (IBAction)dismissEditView:(id)sender 
 {
     [topBarView2 setHidden:NO];
+    [bottomBarView2 setHidden:NO];
     [reminderTextView resignFirstResponder];
     [placeSearchBar resignFirstResponder];
     [searchDisplayController setActive:FALSE animated:TRUE];

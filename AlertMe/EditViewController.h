@@ -39,6 +39,7 @@
 @property (retain, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (retain, nonatomic) IBOutlet UIView *locationView;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *segmentedControl;
+@property (nonatomic, retain) IBOutlet UIImageView *segImage;
 @property (retain, nonatomic) CLLocationManager *locationManager;
 @property (retain, nonatomic) IBOutlet UILabel *currentLocationLabel;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *locationActivityIndicator;

@@ -11,6 +11,7 @@
 #import "EditViewController.h"
 #import "ReminderStore.h"
 #import "TempViewController.h"
+#import "TestFlight.h"
 
 @interface AppDelegate()
 
@@ -42,6 +43,7 @@
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     self.window.backgroundColor = [UIColor whiteColor];
+    [TestFlight takeOff:@"8cc41b9c4bfed6ddf6616f150787800f_MTQ5NjIwMTEtMTAtMTggMjA6NDA6MjEuMjY3OTk1"];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque];
     UIImage *plusButtonImage=[UIImage imageNamed:@"PlusButton2.png"]; //don't forget the non-retina image
@@ -88,8 +90,9 @@
 // **** Temporary
 -(void)showLocation
 {
-    TempViewController *temp_vc = [[TempViewController alloc] initWithNibName:nil bundle:nil];
-    [[self nav] pushViewController:temp_vc animated:YES];
+//    TempViewController *temp_vc = [[TempViewController alloc] initWithNibName:nil bundle:nil];
+//    [[self nav] pushViewController:temp_vc animated:YES];
+    [TestFlight openFeedbackView];
  
 }
 // ****

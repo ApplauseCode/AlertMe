@@ -12,6 +12,7 @@
 #import "Reminder.h"
 #import "CustomCell.h"
 #import "AppDelegate.h"
+#import "TestFlight.h"
 
 @interface InboxViewController() 
 
@@ -107,7 +108,7 @@
         tableView.separatorColor = [UIColor darkGrayColor];
         //[[self tableView] setBackgroundView:bgView];
         [[self tableView] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"linen.png"]]];
-        //[[self tableView] setBackgroundColor:[UIColor viewFlipsideBackgroundColor]];
+        //[[self tableView] setBackgroundColor:[UIColor darkGrayColor]];
     }
     return [[rs allReminders] count];
 }
